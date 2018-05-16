@@ -1,0 +1,66 @@
+[
+  {
+    title: "Site3"
+    paths: [
+      "F:\\Raymacz\\xampp\\htdocs\\wp\\site3"
+    ]
+    devMode: true
+  }
+  {
+    title: "Site1"
+    paths: [
+      "F:\\Raymacz\\xampp\\htdocs\\wp\\site1"
+    ]
+    devMode: true
+  }
+  {
+    title: "Site2"
+    paths: [
+      "F:\\Raymacz\\xampp\\htdocs\\wp\\site2"
+    ]
+    devMode: true
+  }
+  {
+    title: "Bootstrap 4 Test"
+    paths: [
+      "F:\\Raymacz\\xampp\\htdocs\\bootstrap-4-test"
+    ]
+    devMode: true
+  }
+  {
+    title: "Sb Agency"
+    paths: [
+      "F:\\Raymacz\\xampp\\htdocs\\bootstrap-4-test\\sb-agency"
+    ]
+    devMode: true
+  }
+  {
+    title: "Framemacz"
+    paths: [
+      "F:\\Raymacz\\xampp\\htdocs\\wp\\site3\\wp-content\\themes\\framemacz"
+    ]
+    devMode: true
+  }
+  {
+    title: "Rbtm Cpts"
+    paths: [
+      "F:\\Raymacz\\xampp\\htdocs\\wp\\site3\\wp-content\\plugins\\rbtm_cpts"
+    ]
+    devMode: true
+  }
+  {
+    title: "Auberge Theme"
+    paths: [
+      "F:\\Raymacz\\xampp\\htdocs\\wp\\site1\\wp-content\\themes\\auberge"
+      "F:\\Raymacz\\xampp\\htdocs\\wp\\site1\\wp-content\\themes\\auberge-child"
+    ]
+    devMode: true
+  }
+  {
+    title: "Pxmacz"
+    paths: [
+      "F:\\Raymacz\\xampp\\htdocs\\wp\\site4\\wp-content\\themes\\pxmacz"
+    ]
+    devMode: true
+  }
+]

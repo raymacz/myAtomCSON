@@ -1,0 +1,56 @@
+"*":
+  "atom-beautify":
+    executables:
+      php:
+        path: "F:\\Raymacz\\xampp\\php\\php.exe"
+      "php-cs-fixer":
+        path: "F:\\Raymacz\\xampp\\php\\php-cs-fixer.phar"
+    general:
+      _analyticsUserId: "55e6ea4d-019e-41a2-8e95-f7769ed9e215"
+      beautifyEntireFileOnSave: false
+    html: {}
+  "autocomplete-php":
+    executablePath: "F:\\Raymacz\\xampp\\php\\php.exe"
+  "color-picker":
+    preferredFormat: "HSL"
+  core:
+    disabledPackages: [
+      "atom-bootstrap3"
+      "language-ruby-on-rails"
+      "language-csharp"
+      "language-mustache"
+      "language-c"
+      "language-clojure"
+      "language-objective-c"
+      "language-perl"
+      "language-ruby"
+    ]
+    telemetryConsent: "limited"
+    uriHandlerRegistration: "always"
+  editor:
+    showIndentGuide: true
+    showInvisibles: true
+  "exception-reporting":
+    userId: "829f72d6-c49d-47e5-89e6-68d5b2d73c9d"
+  "file-icons": {}
+  "git-plus":
+    general:
+      gitPath: "F:\\MyTutorials\\MyWork\\Git\\bin\\git.exe"
+  "linter-php":
+    errorReporting: false
+    executablePath: "F:\\Raymacz\\xampp\\php\\php.exe"
+  "linter-ui-default": {}
+  minimap:
+    plugins:
+      "find-and-replace": true
+      "find-and-replaceDecorationsZIndex": 0
+      "highlight-selected": true
+      "highlight-selectedDecorationsZIndex": 0
+      pigments: true
+      pigmentsDecorationsZIndex: 0
+  "project-manager":
+    alwaysOpenInSameWindow: true
+  "tree-view":
+    hideVcsIgnoredFiles: true
+  welcome:
+    showOnStartup: false

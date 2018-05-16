@@ -1,0 +1,105 @@
+# Your snippets
+#
+# Atom snippets allow you to enter a simple prefix in the editor and hit tab to
+# expand the prefix into a larger code block with templated values.
+#
+# You can create a new snippet in this file by typing "snip" and then hitting
+# tab.
+#
+# An example CoffeeScript snippet to expand log to console.log:
+#
+# '.source.coffee':
+#   'Console log':
+#     'prefix': 'log'
+#     'body': 'console.log $1'
+#
+# Each scope (e.g. '.source.coffee' above) can only be declared once.
+#
+# This file uses CoffeeScript Object Notation (CSON).
+# If you are unfamiliar with CSON, you can read more about it in the
+# Atom Flight Manual:
+# http://flight-manual.atom.io/using-atom/sections/basic-customization/#_cson
+#
+#Plain Text: .text.plain
+#HTML: .text.html.basic
+#CSS: .source.css
+#Sass: .source.sass
+#LESS: .source.css.less
+#JavaScript: .source.js
+#PHP: .text.html.php
+#Python: .source.python
+#Java: .source.java
+
+ ######  complete  example of snippets ####################
+
+
+
+
+##### ------------ CSS Snippet --------------------------
+'.source.css':
+   'V-Align Any Elem':
+     'prefix': 'css__vaae'
+     'body': """
+      $0 .element {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+       """
+     'description': 'CSS vertically aligns any Element'
+   'V-Align Element Table':
+     'prefix': 'css__vatc'
+     'body': """
+      $0 .element {
+        display: table-cell;
+        vertical-align: middle;
+        position: relative;
+      }
+       """
+     'description': 'CSS vertically aligns element using Table'
+   'Flex Sample One':
+     'prefix': 'css__flex1'
+     'body': """
+      $0 .site-branding {
+        display: flex;
+        flex-direction: row;
+        flex: 1 0 auto;
+        min-height: 65px;
+        justify-content: center;
+        text-align:center;
+      }
+       """
+     'description': 'A sample #1 of using flex'
+   'Smooth Font':
+     'prefix': 'css__smotf'
+     'body': """
+      $0 .element {
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+          }
+       """
+     'description': 'CSS smoothing font'
+
+ ##### ------------ HTML Snippet --------------------------
+ '.text.html.basic':
+    'Widget Title':
+      'prefix': 'wti'
+      'body': '<h4 class="widget-title"></h4>'
+    'Image Link':
+      'prefix': 'iml'
+      'body': """
+        <figure>
+          <a href="$1" target="_blank">
+            <img src="$2" width="$3" height="$4" alt="$5">
+            </a>
+        </figure>
+        """
+      'description': 'Add an <figure> image with <a>'
+      'descriptionMoreURL': 'http://hongkiat.com'
+
+    ##------  BOOTSTRAP 4 SNIPPETS --------------------
+
+
+###### ------------ PHP Snippet --------------------------
+ # '.text.html.php':
+   ##------  WORDPRESS SNIPPETS --------------------
