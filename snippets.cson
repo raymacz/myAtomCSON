@@ -101,5 +101,337 @@
 
 
 ###### ------------ PHP Snippet --------------------------
- # '.text.html.php':
+  '.text.html.php':
    ##------  WORDPRESS SNIPPETS --------------------
+   'WP Remove Version #':
+     'prefix': 'wp__rm_ver'
+     'body': """
+        //Remove WordPress Version Number
+        function rbtm_remove_version() { return '';}
+        add_filter('the_generator', 'rbtm_remove_version');
+       """
+     'description': 'Remove WordPress Version Number'
+     'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Add Custom Logo Admin':
+     'prefix': 'wp__clogo_admin'
+     'body': """
+        //hook into the administrative header output & add a Custom Dashboard Logo
+         add_action('wp_before_admin_bar_render', function() {
+             echo '
+                 <style type="text/css">
+                 #wpadminbar #wp-admin-bar-wp-logo > .ab-item .ab-icon:before {
+                 background-image: url(' . get_bloginfo('stylesheet_directory') . '/images/custom-logo.png) !important;
+                 background-position: 0 0;
+                 color:rgba(0, 0, 0, 0);
+                 }
+                 #wpadminbar #wp-admin-bar-wp-logo.hover > .ab-item .ab-icon {
+                 background-position: 0 0;
+                 }
+                 </style>
+             ';
+         });
+       """
+     'description': 'Add a Custom Admin Dashboard Logo'
+     'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Admin Footer Text':
+     'prefix': 'wp__ft_txt_admin'
+     'body': """
+         // https://developer.wordpress.org/reference/hooks/admin_footer_text/
+          add_filter('admin_footer_text', function() {
+              echo 'Fueled by <a href="http://www.wordpress.org" target="_blank">WordPress</a> | WordPress Tutorials: <a href="#" target="_blank">Webmacz</a></p>';
+          });
+       """
+     'description': 'Change the Footer in WordPress Admin Panel'
+     'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Custom Dashboard Widget':
+  	 'prefix': 'wp__cdash_widget'
+  	 'body': """
+        add_action('wp_dashboard_setup', 'my_custom_dashboard_widgets');
+
+        function my_custom_dashboard_widgets() {
+            global $wp_meta_boxes;
+            wp_add_dashboard_widget('custom_help_widget', 'Theme Support', function() {
+                echo '<p>Welcome to Custom Blog Theme! Need help? Contact the developer <a href="mailto:yourusername@gmail.com">here</a>. For WordPress Tutorials visit: <a href="#" target="_blank">Webmacz</a></p>';
+            });
+        }
+  	   """
+  	 'description': 'Add Custom Dashboard Widgets in WordPress'
+  	 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Change Gravatar':
+  	 'prefix': 'wp__gravatar'
+  	 'body': """
+        add_filter( 'avatar_defaults', 'rbtm_new_gravatar' );
+          function rbtm_new_gravatar ($avatar_defaults) {
+          $myavatar = 'http://example.com/wp-content/uploads/2017/01/wpb-default-gravatar.png';
+          $avatar_defaults[$myavatar] = "Default Gravatar";
+          return $avatar_defaults;
+        }
+  	   """
+  	 'description': 'Change the Default Gravatar in WordPress'
+  	 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Footer Dynamic Copyright':
+  	 'prefix': 'wp__ft_copyright'
+  	 'body': """
+        function rbtm_copyright()
+        {   // NOTE: add to plugin or functions.php
+            global $wpdb;
+            $copyright_dates = $wpdb->get_results("
+        			SELECT
+        			YEAR(min(post_date_gmt)) AS firstdate,
+        			YEAR(max(post_date_gmt)) AS lastdate
+        			FROM
+        			$wpdb->posts
+        			WHERE
+        			post_status = 'publish'
+        		");
+            $output = '';
+            if ($copyright_dates) {
+                $copyright = "© " . $copyright_dates[0]->firstdate;
+                if ($copyright_dates[0]->firstdate != $copyright_dates[0]->lastdate) {
+                    $copyright .= '-' . $copyright_dates[0]->lastdate;
+                }
+                $output = $copyright;
+            }
+            return $output;
+        }
+         echo rbtm_copyright(); // NOTE: add to footer.php
+  	   """
+  	 'description': 'This function looks - date of first post & date of last post.'
+  	 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Change Background Color':
+  	 'prefix': 'wp__bgcolor'
+  	 'body': """
+        function rbtm_bgcolor()
+        {
+            $rand = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f');
+            $color ='#'.$rand[rand(0, 15)].$rand[rand(0, 15)].$rand[rand(0, 15)].$rand[rand(0, 15)].$rand[rand(0, 15)].$rand[rand(0, 15)];
+            echo $color;
+        }
+        // edit header.php, Locate <body> & add replace
+        //  <body <?php body_class(); ?> style="background-color: <?php // rbtm_bgcolor();?>">>
+  	   """
+  	 'description': 'Randomly Change Background Color in WordPress'
+  	 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Update URLs':
+  	 'prefix': 'wp__update_url'
+  	 'body': """
+        // add this to functions.php //  check http://site1.net/wp-admin/options.php
+        update_option( 'siteurl', 'http://example.com' );
+        update_option( 'home', 'http://example.com' );
+        // Once logged in, Set the URLs in WP Settings. Then remove this code from functions.php, or will keep updating URLs when site is accessed.
+  	   """
+  	 'description': 'If you are unable to access admin area, then update WordPress URLs to fix it.'
+  	 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Add Image Sizes':
+  	 'prefix': 'wp__add_img_size'
+  	 'body': """
+        add_image_size( 'sidebar-thumb', 120, 120, true ); // Hard Crop Mode
+        add_image_size( 'homepage-thumb', 220, 180 ); // Soft Crop Mode
+        add_image_size( 'singlepost-thumb', 590, 9999 ); // Unlimited Height Mode
+
+        //You can display an image size in anywhere in your theme using this code.
+        // the_post_thumbnail( 'homepage-thumb' );
+  	   """
+  	 'description': 'Add Additional Image Sizes in WordPress'
+  	 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Add User Profile fields Admin':
+   	 'prefix': 'wp__add_pfields_admin'
+   	 'body': """
+       function rbtm_new_contactmethods( $contactmethods ) {
+         $contactmethods['twitter'] = 'Twitter'; // Add Twitter
+         $contactmethods['facebook'] = 'Facebook'; //add Facebook
+         return $contactmethods;
+        }
+      add_filter('user_contactmethods','rbtm_new_contactmethods',10,1);
+      // see CODEX: wp_get_user_contact_methods($user)
+      // <?php echo $curauth->twitter; ?> //  you can display fields in author template
+   	   """
+   	 'description': 'Add User (e.g. Author) Profile Fields in WP Admin'
+   	 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Widget Register Sidebar':
+   	 'prefix': 'wp__reg_sb_widget'
+   	 'body': """
+       add_action( 'widgets_init', function() { // Register Sidebars
+       $args = array(
+           'id'            => 'custom_sidebar',
+           'name'          => __( 'Custom Widget Area', 'text_domain' ),
+           'description'   => __( 'A custom widget area', 'text_domain' ),
+           'before_title'  => '<h3 class="widget-title">',
+           'after_title'   => '</h3>',
+           'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+           'after_widget'  => '</aside>',
+       );
+       register_sidebar( $args );
+      });
+      /*   // To display widget
+      <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('custom_sidebar') ) : ?>
+      <!–Default sidebar info goes here–>
+      <?php endif; ?>
+      */
+ 	   """
+   	 'description': 'Adding Widget Ready Areas or Sidebar in WordPress Themes'
+   	 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Change RSS in Post':
+  	 'prefix': 'wp__rss_post'
+  	 'body': """
+     function rbtm_postrss($content) {
+       if (is_feed()) {
+           $content = 'This post was written by Raymacz '.$content.' Check Webmacz.ml';
+       }
+       return $content;
+      }
+      add_filter('the_excerpt_rss', 'rbtm_postrss');
+      add_filter('the_content', 'rbtm_postrss');
+  	   """
+  	 'description': 'Manipulate RSS Feed Footer - adds advert in RSS Feeds below each post'
+  	 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Featured Image to RSS':
+  	 'prefix': 'wp__rss_fi'
+  	 'body': """
+       function rbtm_rss_post_thumbnail($content) {
+           global $post;
+           if (has_post_thumbnail($post->ID)) {
+               $content = '<p>' . get_the_post_thumbnail($post->ID) .'</p>'. get_the_content();
+         }
+         return $content;
+        }
+        add_filter('the_excerpt_rss', 'rbtm_rss_post_thumbnail');
+        add_filter('the_content_feed', 'rbtm_rss_post_thumbnail');
+  	   """
+  	 'description': 'Add Featured Images to RSS Feeds'
+  	 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Hide Login Error':
+  	 'prefix': 'wp__he_login'
+  	 'body': """
+        add_filter( 'login_errors', function() {
+         return 'Something is wrong!!!';
+        });
+  	   """
+  	 'description': 'Hide Login Error Message in WordPress'
+  	 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Remove Email Login':
+     	 'prefix': 'wp__rm_emaillogin'
+     	 'body': """
+          // check default-filters.php to understand how remove filters work
+          // also search where the function is located in the WP core
+          // wp_authenticate_email_password() // wp_authenticate_username_password() // wp_authenticate
+          remove_filter( 'authenticate', 'wp_authenticate_email_password', 20 );
+     	   """
+     	 'description': 'Disable Login by Email in WordPress & retain login by username'
+     	 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+     'WP Search Disabled':
+   		 'prefix': 'wp__no_srch'
+   		 'body': """
+         function fb_filter_query($query, $error = true)
+          {
+           if (is_search()) {
+               $query->is_search = false;
+               $query->query_vars[s] = false; // [s] initialize array w/ error input & produce false results
+               $query->query[s] = false;
+          // to error // check class-wp-query.php // $qqq = new WP_Query(); $qqq->is_search(); // $qqq->query_vars; // $qqq->query;
+               if ($error == true) {
+                   $query->is_404 = true;
+               }
+           }
+          }
+
+          add_action('parse_query', 'fb_filter_query');
+          add_filter('get_search_form', create_function('$a', "return null;"));  // ??? not sure how this works
+   		   """
+   		 'description': 'Disable Search Feature in WordPress'
+   		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+     'WP Delay Post Feed':
+   		 'prefix': 'wp__dlay_postfeed'
+   		 'body': """
+         function publish_later_on_feed($where) {
+           global $wpdb; // to change delay time use: $wait, $device
+           if ( is_feed() ) {
+               // timestamp in WP-format
+               $now = gmdate('Y-m-d H:i:s');
+               // value for wait; + device
+               $wait = '30'; // integer // default delay
+               // http://dev.mysql.com/doc/refman/5.0/en/date-and-time-functions.html#function_timestampdiff
+               $device = 'MINUTE'; //MINUTE, HOUR, DAY, WEEK, MONTH, YEAR
+               // add SQL-sytax to default $where
+               $where .= " AND TIMESTAMPDIFF($device, $wpdb->posts.post_date_gmt, '$now') > $wait ";
+           }
+           return $where;
+          }
+
+        add_filter('posts_where', 'publish_later_on_feed');
+
+   		   """
+   		 'description': 'Delay Posts in RSS Feed by filtering WHERE - database. '
+   		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+     'WP Read More Excerpt Change':
+      'prefix': 'wp__readmor'
+      'body': """
+        function modify_read_more_link() {
+          return '<a class="more-link" href="' . get_permalink() . '">Your Read More Link Text</a>';
+        }
+        add_filter( 'the_content_more_link', 'modify_read_more_link' );
+        """
+      'description': 'Change Read More Text for Excerpts in WordPress'
+      'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+    'WP Disable RSS':
+  		 'prefix': 'wp__rss_da'
+  		 'body': """
+         function fb_disable_feed()
+         {
+             wp_die(__('No feed available,please visit our <a href="'. get_bloginfo('url') .'">homepage</a>!'));
+         }
+
+         add_action('do_feed', 'fb_disable_feed', 1);
+         add_action('do_feed_rdf', 'fb_disable_feed', 1);
+         add_action('do_feed_rss', 'fb_disable_feed', 1);
+         add_action('do_feed_rss2', 'fb_disable_feed', 1);
+         add_action('do_feed_atom', 'fb_disable_feed', 1);
+  		   """
+  		 'description': 'Disable RSS Feeds in WordPress'
+  		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Show Hook filters (simple)':
+      'prefix': 'wp__filter_show'
+      'body': """
+          add_action( 'wp_footer', function() {
+            global $wp_filter;
+            echo "<pre>" . var_dump( $wp_filter['wp_head'] ) . "</pre>";
+            // echo "<pre>" . print_r($wp_filter, true) . "</pre>";
+        });
+
+        """
+      'description': ' Show a simple list of functions / filters attached in a particular hook'
+      'descriptionMoreURL': 'https://wordpress.stackexchange.com/questions/17394/how-to-know-what-functions-are-hooked-to-an-action-filter'
+   'WP Show Hook filters (detailed)':
+  		 'prefix': 'wp__filter_showall'
+  		 'body': """
+          add_action( 'wp_footer', 'rbtm_func_n_hook' );
+
+           function rbtm_func_n_hook()
+           {  // Shows a comprehensive result of functions/filter attached in a hook
+               global $wp_filter;
+
+               $hook_filters = array ();
+               $h1  = '<h1>List of Filters / Functions</h1>';
+               $out = '';
+               $toc = '<ul>';
+
+               foreach ( $wp_filter as $key => $val )
+               {
+                   // if ( FALSE !== strpos( $key, 'comment' ) )
+                   if ( FALSE !== strpos( $key, 'after_setup_theme' ) ) // put here the hook
+                   {
+                       $hook_filters[$key][] = var_export( $val, TRUE );
+                   }
+               }
+
+               foreach ( $hook_filters as $name => $arr_vals )
+               {
+                   $out .= "<h2 id=$name>$name</h2><pre>" . implode( "\n\n", $arr_vals ) . '</pre>';
+                   $toc .= "<li><a href='#$name'>$name</a></li>";
+               }
+
+               print "$h1$toc</ul>$out";
+            }
+  		   """
+  		 'description': 'Shows a comprehensive list of functions/filter attached in a particular hook'
+  		 'descriptionMoreURL': 'https://wordpress.stackexchange.com/questions/17394/how-to-know-what-functions-are-hooked-to-an-action-filter'
