@@ -404,8 +404,6 @@
    'WP Show Hook filters (detailed)':
   		 'prefix': 'wp__filter_showall'
   		 'body': """
-          add_action( 'wp_footer', 'rbtm_func_n_hook' );
-
            function rbtm_func_n_hook()
            {  // Shows a comprehensive result of functions/filter attached in a hook
                global $wp_filter;
@@ -432,6 +430,232 @@
 
                print "$h1$toc</ul>$out";
             }
+            add_action( 'wp_footer', 'rbtm_func_n_hook' );
   		   """
   		 'description': 'Shows a comprehensive list of functions/filter attached in a particular hook'
   		 'descriptionMoreURL': 'https://wordpress.stackexchange.com/questions/17394/how-to-know-what-functions-are-hooked-to-an-action-filter'
+   'WP Excerpt Length':
+   		 'prefix': 'wp__excerpt_len'
+   		 'body': """
+       function rbtm_new_excerpt_length($length) {
+         return 100;
+       }
+       add_filter('excerpt_length', 'rbtm_new_excerpt_length');
+   		   """
+   		 'description': 'Change Excerpt Length in WordPress'
+   		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Add Admin User':
+   		 'prefix': 'wp__add_user_admin'
+   		 'body': """
+         function rbtm_admin_account()
+          {
+           $user = 'Username';
+           $pass = 'Password';
+           $email = 'email@domain.com';
+           if (!username_exists($user)  && !email_exists($email)) {
+               $user_id = wp_create_user($user, $pass, $email);
+               $user = new WP_User($user_id);
+               $user->set_role('administrator');
+           }
+          }
+          add_action('init', 'rbtm_admin_account');
+   		   """
+   		 'description': 'If forgotten credentials, add an Admin User in WordPress instantly. Remove code afterwards'
+   		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Remove Welcome Admin':
+   		 'prefix': 'wp__rm_welcom'
+   		 'body': """
+          remove_action('welcome_panel', 'wp_welcome_panel');
+   		   """
+   		 'description': 'Remove Welcome Panel from WP Dashboard'
+   		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Count Total Users':
+   		 'prefix': 'wp__user_count_a'
+   		 'body': """
+         // Function to return user count
+          function rbtm_user_count()
+          {
+           $usercount = count_users();
+           $result = $usercount['total_users'];
+           return $result;
+          }
+          // Creating a shortcode to display user count
+          add_shortcode('user_count', 'rbtm_user_count');
+          //add  shortcode [user_count] to your post or page
+   		   """
+   		 'description': 'Show Total Count Number of Registered Users in WordPress'
+   		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Exclude Category in Feeds':
+   		 'prefix': 'wp__rss_excl_cat'
+   		 'body': """
+         function rbtm_exclude_category($query) {
+             if ( $query->is_feed ) {
+                 $query->set('cat', '-5, -2, -3');
+             }
+            return $query;
+          }
+          add_filter('pre_get_posts', 'rbtm_exclude_category');
+   		   """
+   		 'description': 'Exclude Specific Categories from RSS Feed'
+   		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Shortcode Enabled in Widget':
+   		 'prefix': 'wp__widget_shortc'
+   		 'body': """
+         // Enable shortcodes in text widgets // check do_shortcode($content);
+         add_filter('widget_text','do_shortcode');
+   		   """
+   		 'description': 'Enable Shortcode Execution in Text Widgets'
+   		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Odd Even Class to Post':
+   		 'prefix': 'wp__oe_class_post'
+   		 'body': """
+         //global $current_class;  //???
+         //$current_class = 'odd'; //??? excluded from code & made modifications
+         function rbtm_oddeven_post_class ( $classes ) {
+            global $mycurrent_class;
+            $mycurrent_class = ($mycurrent_class == 'odd') ? 'even' : 'odd';
+            $classes[] = $mycurrent_class;
+            return $classes;
+          }
+          add_filter( 'post_class' , 'rbtm_oddeven_post_class' );
+   		   """
+   		 'description': 'Simply adds an odd or even class to WordPress post for styling'
+   		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP File Type Support':
+   		 'prefix': 'wp__file_ts'
+   		 'body': """
+         function rbtm_myme_types($mime_types){
+            $mime_types['svg'] = 'image/svg+xml'; //Adding svg extension
+            $mime_types['svgz'] = 'image/svg+xml'; //Adding svg extension
+            $mime_types['psd'] = 'image/vnd.adobe.photoshop'; //Adding photoshop files
+            $mime_types['doc'] = 'application/msword';
+
+            unset( $mime_types['exe'] ); // Optional. Remove a mime type.
+            return $mime_types;
+          }
+          add_filter('upload_mimes', 'rbtm_myme_types', 1, 1);
+   		   """
+   		 'description': 'Add or Remove Additional File Types support to be Uploaded in WordPress'
+   		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Remove Image Link':
+   		 'prefix': 'wp__rm_img_lnk'
+   		 'body': """
+         function rbtm_imagelink_setup() {
+          //    check option.php if it has value of image_default_link_type
+           $image_set = get_option( 'image_default_link_type' );
+           if ($image_set !== 'none') {
+               update_option('image_default_link_type', 'none');
+           }
+          }
+          add_action('admin_init', 'rbtm_imagelink_setup', 10);
+          // https://www.daddydesign.com/wordpress/how-to-change-the-default-attachment-display-settings-in-wordpress-without-a-plugin/
+   		   """
+   		 'description': 'Remove Default Image Links in WP Options.php (Default Attachment Display Settings)'
+   		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP More Author Info in Post':
+   		 'prefix': 'wp__add_authorinfo'
+   		 'body': """
+          function rbtm_author_info_box($content)
+          {
+           global $post;
+
+           // Detect if it is a single post with a post author
+           if (is_single() && isset($post->post_author)) {
+
+          // Get author's display name
+               $display_name = get_the_author_meta('display_name', $post->post_author);
+
+               // If display name is not available then use nickname as display name
+               if (empty($display_name)) {
+                   $display_name = get_the_author_meta('nickname', $post->post_author);
+               }
+
+               // Get author's biographical information or description
+               $user_description = get_the_author_meta('user_description', $post->post_author);
+
+               // Get author's website URL
+               $user_website = get_the_author_meta('url', $post->post_author);
+
+               // Get link to the author archive page
+               $user_posts = get_author_posts_url(get_the_author_meta('ID', $post->post_author));
+
+               if (! empty($display_name)) {
+                   $author_details = '<p class="author_name">About ' . $display_name . '</p>';
+               }
+
+               if (! empty($user_description)) {
+                   // Author avatar and bio
+
+                   $author_details .= '<p class="author_details">' . get_avatar(get_the_author_meta('user_email'), 90) . nl2br($user_description). '</p>';
+               }
+
+               $author_details .= '<p class="author_links"><a href="'. $user_posts .'">View all posts by ' . $display_name . '</a>';
+
+               // Check if author has a website in their profile
+               if (! empty($user_website)) {
+
+          // Display author website link
+                   $author_details .= ' | <a href="' . $user_website .'" target="_blank" rel="nofollow">Website</a></p>';
+               } else {
+                   // if there is no author website then just close the paragraph
+                   $author_details .= '</p>';
+               }
+
+               // Pass all this info to post content
+               $content = $content . '<footer class="author_bio_section" >' . $author_details . '</footer>';
+           }
+           return $content;
+          }
+
+          // Add our function to the post content filter
+          add_action('the_content', 'rbtm_author_info_box');
+
+          // Allow HTML in author bio section
+          remove_filter('pre_user_description', 'wp_filter_kses');
+
+          /*
+          .author_bio_section{
+          background: none repeat scroll 0 0 #F5F5F5;
+          padding: 15px;
+          border: 1px solid #ccc;
+          }
+
+          .author_name{
+          font-size:16px;
+          font-weight: bold;
+          }
+
+          .author_details img {
+          border: 1px solid #D8D8D8;
+          border-radius: 50%;
+          float: left;
+          margin: 0 10px 10px 0;
+          }
+          *  add this to your CSS
+          */
+   		   """
+   		 'description': 'Add a multi-author Info Box at the end of Posts '
+   		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Disable XML-RPC':
+   		 'prefix': 'wp__rm_xml-rpc'
+   		 'body': """
+          add_filter('xmlrpc_enabled', '__return_false');
+   		   """
+   		 'description': 'Disable XML-RPC in WordPress - XML-RPC is a method that allows third party apps to communicate w/ WP site remotely. A potential security issue!'
+   		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Link Featured Image':
+   		 'prefix': 'wp__link_img_post'
+   		 'body': """
+         function rbtm_autolink_featured_images($html, $post_id, $post_image_id)
+          {
+           if (! is_singular()) {
+               $html = '<a href="' . get_permalink($post_id) . '" title="' . esc_attr(get_the_title($post_id)) . '">' . $html . '</a>';
+               return $html;
+           } else {
+               return $html;
+           }
+          }
+          add_filter('post_thumbnail_html', 'rbtm_autolink_featured_images', 10, 3);
+   		   """
+   		 'description': 'Automatically Link Featured Images to Posts'
+   		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
