@@ -110,7 +110,7 @@
         function rbtm_remove_version() { return '';}
         add_filter('the_generator', 'rbtm_remove_version');
        """
-     'description': 'Remove WordPress Version Number'
+     'description': 'Remove WordPress Version Number = the_generator'
      'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
    'WP Add Custom Logo Admin':
      'prefix': 'wp__clogo_admin'
@@ -131,17 +131,16 @@
              ';
          });
        """
-     'description': 'Add a Custom Admin Dashboard Logo'
+     'description': 'Add a Custom Admin Dashboard Logo = wp_before_admin_bar_render'
      'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
    'WP Admin Footer Text':
      'prefix': 'wp__ft_txt_admin'
      'body': """
          // https://developer.wordpress.org/reference/hooks/admin_footer_text/
           add_filter('admin_footer_text', function() {
-              echo 'Fueled by <a href="http://www.wordpress.org" target="_blank">WordPress</a> | WordPress Tutorials: <a href="#" target="_blank">Webmacz</a></p>';
-          });
+              echo 'Fueled by <a href="http://www.wordpress.org" target="_blank">WordPress</a> | WordPress Tutorials: <a href="#" target="_blank">Webmacz</a></p>'; });
        """
-     'description': 'Change the Footer in WordPress Admin Panel'
+     'description': 'Change the Footer in WordPress Admin Panel = admin_footer_text'
      'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
    'WP Custom Dashboard Widget':
   	 'prefix': 'wp__cdash_widget'
@@ -155,7 +154,7 @@
             });
         }
   	   """
-  	 'description': 'Add Custom Dashboard Widgets in WordPress'
+  	 'description': 'Add Custom Dashboard Widgets in WordPress = wp_dashboard_setup'
   	 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
    'WP Change Gravatar':
   	 'prefix': 'wp__gravatar'
@@ -167,7 +166,7 @@
           return $avatar_defaults;
         }
   	   """
-  	 'description': 'Change the Default Gravatar in WordPress'
+  	 'description': 'Change the Default Gravatar in WordPress = avatar_defaults'
   	 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
    'WP Footer Dynamic Copyright':
   	 'prefix': 'wp__ft_copyright'
@@ -220,7 +219,7 @@
         update_option( 'home', 'http://example.com' );
         // Once logged in, Set the URLs in WP Settings. Then remove this code from functions.php, or will keep updating URLs when site is accessed.
   	   """
-  	 'description': 'If you are unable to access admin area, then update WordPress URLs to fix it.'
+  	 'description': 'If you are unable to access admin area, then update WordPress URLs to fix it. '
   	 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
    'WP Add Image Sizes':
   	 'prefix': 'wp__add_img_size'
@@ -246,7 +245,7 @@
       // see CODEX: wp_get_user_contact_methods($user)
       // <?php echo $curauth->twitter; ?> //  you can display fields in author template
    	   """
-   	 'description': 'Add User (e.g. Author) Profile Fields in WP Admin'
+   	 'description': 'Add User (e.g. Author) Profile Fields in WP Admin = user_contactmethods'
    	 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
    'WP Widget Register Sidebar':
    	 'prefix': 'wp__reg_sb_widget'
@@ -269,7 +268,7 @@
       <?php endif; ?>
       */
  	   """
-   	 'description': 'Adding Widget Ready Areas or Sidebar in WordPress Themes'
+   	 'description': 'Adding Widget Ready Areas or Sidebar in WordPress Themes = widgets_init'
    	 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
    'WP Change RSS in Post':
   	 'prefix': 'wp__rss_post'
@@ -283,7 +282,7 @@
       add_filter('the_excerpt_rss', 'rbtm_postrss');
       add_filter('the_content', 'rbtm_postrss');
   	   """
-  	 'description': 'Manipulate RSS Feed Footer - adds advert in RSS Feeds below each post'
+  	 'description': 'Manipulate RSS Feed Footer - adds advert in RSS Feeds below each post = the_excerpt_rss'
   	 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
    'WP Featured Image to RSS':
   	 'prefix': 'wp__rss_fi'
@@ -298,7 +297,7 @@
         add_filter('the_excerpt_rss', 'rbtm_rss_post_thumbnail');
         add_filter('the_content_feed', 'rbtm_rss_post_thumbnail');
   	   """
-  	 'description': 'Add Featured Images to RSS Feeds'
+  	 'description': 'Add Featured Images to RSS Feeds = the_excerpt_rss & the_content_feed'
   	 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
    'WP Hide Login Error':
   	 'prefix': 'wp__he_login'
@@ -307,7 +306,7 @@
          return 'Something is wrong!!!';
         });
   	   """
-  	 'description': 'Hide Login Error Message in WordPress'
+  	 'description': 'Hide Login Error Message in WordPress = login_errors'
   	 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
    'WP Remove Email Login':
      	 'prefix': 'wp__rm_emaillogin'
@@ -317,10 +316,10 @@
           // wp_authenticate_email_password() // wp_authenticate_username_password() // wp_authenticate
           remove_filter( 'authenticate', 'wp_authenticate_email_password', 20 );
      	   """
-     	 'description': 'Disable Login by Email in WordPress & retain login by username'
+     	 'description': 'Disable Login by Email in WordPress & retain login by username = authenticate'
      	 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
      'WP Search Disabled':
-   		 'prefix': 'wp__no_srch'
+   		 'prefix': 'wp__rm_srch'
    		 'body': """
          function fb_filter_query($query, $error = true)
           {
@@ -336,9 +335,10 @@
           }
 
           add_action('parse_query', 'fb_filter_query');
-          add_filter('get_search_form', create_function('$a', "return null;"));  // ??? not sure how this works
+          // add_filter('get_search_form', create_function('$a', "return null;"));
+          add_filter('get_search_form', '__return_null');
    		   """
-   		 'description': 'Disable Search Feature in WordPress'
+   		 'description': 'Disable Search Feature in WordPress = parse_query & get_search_form'
    		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
      'WP Delay Post Feed':
    		 'prefix': 'wp__dlay_postfeed'
@@ -361,7 +361,7 @@
         add_filter('posts_where', 'publish_later_on_feed');
 
    		   """
-   		 'description': 'Delay Posts in RSS Feed by filtering WHERE - database. '
+   		 'description': 'Delay Posts in RSS Feed by filtering WHERE - database. = posts_where'
    		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
      'WP Read More Excerpt Change':
       'prefix': 'wp__readmor'
@@ -371,7 +371,7 @@
         }
         add_filter( 'the_content_more_link', 'modify_read_more_link' );
         """
-      'description': 'Change Read More Text for Excerpts in WordPress'
+      'description': 'Change Read More Text for Excerpts in WordPress = the_content_more_link'
       'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
     'WP Disable RSS':
   		 'prefix': 'wp__rss_da'
@@ -387,22 +387,34 @@
          add_action('do_feed_rss2', 'fb_disable_feed', 1);
          add_action('do_feed_atom', 'fb_disable_feed', 1);
   		   """
-  		 'description': 'Disable RSS Feeds in WordPress'
+  		 'description': 'Disable RSS Feeds in WordPress = do_feed'
   		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
-   'WP Show Hook filters (simple)':
-      'prefix': 'wp__filter_show'
+   'WP Action Hook Sequence (simple)':
+      'prefix': 'wp__hook_sequence'
+      'body': """
+        add_action( 'shutdown', function(){
+            foreach( $GLOBALS['wp_actions'] as $action => $count )
+                printf( '%s (%d) <br/>' . PHP_EOL, $action, $count );
+        });
+        // IMPORTANT NOTES:  //you can use the debug bar plugin / query monitor plugin
+        // var_export - is similar to var_dump() but returns the deeper value (simple format)
+        // $wp_filter - global var that returns all filter hooks. Also has values of all functions attached in a hook both filter & action.
+        // $wp_actions - global var that returns all actions hooks but functions attached are excluded.
+        """
+      'description': ' Show action hook fired in sequence.'
+   'WP Functions in a Hook (simple)':
+      'prefix': 'wp__hook_getfunc'
       'body': """
           add_action( 'wp_footer', function() {
             global $wp_filter;
-            echo "<pre>" . var_dump( $wp_filter['wp_head'] ) . "</pre>";
+            echo "<pre>" . var_dump( $wp_filter['after_setup_theme'] ) . "</pre>";
             // echo "<pre>" . print_r($wp_filter, true) . "</pre>";
-        });
-
+          });
         """
-      'description': ' Show a simple list of functions / filters attached in a particular hook'
+      'description': ' Show a simple list of functions / filters attached in a particular hook = wp_footer'
       'descriptionMoreURL': 'https://wordpress.stackexchange.com/questions/17394/how-to-know-what-functions-are-hooked-to-an-action-filter'
-   'WP Show Hook filters (detailed)':
-  		 'prefix': 'wp__filter_showall'
+   'WP Functions in a Hook (detailed)':
+  		 'prefix': 'wp__hook_getfunc_all'
   		 'body': """
            function rbtm_func_n_hook()
            {  // Shows a comprehensive result of functions/filter attached in a hook
@@ -416,7 +428,7 @@
                foreach ( $wp_filter as $key => $val )
                {
                    // if ( FALSE !== strpos( $key, 'comment' ) )
-                   if ( FALSE !== strpos( $key, 'after_setup_theme' ) ) // put here the hook
+                   if ( FALSE !== strpos( $key, 'after_setup_theme' ) ) // //if a hook is found
                    {
                        $hook_filters[$key][] = var_export( $val, TRUE );
                    }
@@ -431,8 +443,12 @@
                print "$h1$toc</ul>$out";
             }
             add_action( 'wp_footer', 'rbtm_func_n_hook' );
+            // IMPORTANT NOTES:  //you can use the debug bar plugin / query monitor plugin
+            // var_export - is similar to var_dump() but returns the deeper value (simple format)
+            // $wp_filter - global var that returns all filter hooks. Also has values of all functions attached in a hook both filter & action.
+            // $wp_actions - global var that returns all actions hooks but functions attached are excluded.
   		   """
-  		 'description': 'Shows a comprehensive list of functions/filter attached in a particular hook'
+  		 'description': 'Shows a comprehensive list of functions/filter attached in a particular hook = wp_footer'
   		 'descriptionMoreURL': 'https://wordpress.stackexchange.com/questions/17394/how-to-know-what-functions-are-hooked-to-an-action-filter'
    'WP Excerpt Length':
    		 'prefix': 'wp__excerpt_len'
@@ -442,7 +458,7 @@
        }
        add_filter('excerpt_length', 'rbtm_new_excerpt_length');
    		   """
-   		 'description': 'Change Excerpt Length in WordPress'
+   		 'description': 'Change Excerpt Length in WordPress = excerpt_length'
    		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
    'WP Add Admin User':
    		 'prefix': 'wp__add_user_admin'
@@ -460,14 +476,14 @@
           }
           add_action('init', 'rbtm_admin_account');
    		   """
-   		 'description': 'If forgotten credentials, add an Admin User in WordPress instantly. Remove code afterwards'
+   		 'description': 'If forgotten credentials, add an Admin User in WordPress instantly. Remove code afterwards = init'
    		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
    'WP Remove Welcome Admin':
    		 'prefix': 'wp__rm_welcom'
    		 'body': """
           remove_action('welcome_panel', 'wp_welcome_panel');
    		   """
-   		 'description': 'Remove Welcome Panel from WP Dashboard'
+   		 'description': 'Remove Welcome Panel from WP Dashboard = welcome_panel'
    		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
    'WP Count Total Users':
    		 'prefix': 'wp__user_count_a'
@@ -483,7 +499,7 @@
           add_shortcode('user_count', 'rbtm_user_count');
           //add  shortcode [user_count] to your post or page
    		   """
-   		 'description': 'Show Total Count Number of Registered Users in WordPress'
+   		 'description': 'Show Total Count Number of Registered Users in WordPress = user_count'
    		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
    'WP Exclude Category in Feeds':
    		 'prefix': 'wp__rss_excl_cat'
@@ -496,7 +512,7 @@
           }
           add_filter('pre_get_posts', 'rbtm_exclude_category');
    		   """
-   		 'description': 'Exclude Specific Categories from RSS Feed'
+   		 'description': 'Exclude Specific Categories from RSS Feed = pre_get_posts'
    		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
    'WP Shortcode Enabled in Widget':
    		 'prefix': 'wp__widget_shortc'
@@ -504,7 +520,7 @@
          // Enable shortcodes in text widgets // check do_shortcode($content);
          add_filter('widget_text','do_shortcode');
    		   """
-   		 'description': 'Enable Shortcode Execution in Text Widgets'
+   		 'description': 'Enable Shortcode Execution in Text Widgets = widget_text'
    		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials25-extremely-useful-tricks-for-the-wordpress-functions-file/'
    'WP Odd Even Class to Post':
    		 'prefix': 'wp__oe_class_post'
@@ -519,7 +535,7 @@
           }
           add_filter( 'post_class' , 'rbtm_oddeven_post_class' );
    		   """
-   		 'description': 'Simply adds an odd or even class to WordPress post for styling'
+   		 'description': 'Simply adds an odd or even class to WordPress post for styling = post_class'
    		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
    'WP File Type Support':
    		 'prefix': 'wp__file_ts'
@@ -535,7 +551,7 @@
           }
           add_filter('upload_mimes', 'rbtm_myme_types', 1, 1);
    		   """
-   		 'description': 'Add or Remove Additional File Types support to be Uploaded in WordPress'
+   		 'description': 'Add or Remove Additional File Types support to be Uploaded in WordPress = upload_mimes'
    		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
    'WP Remove Image Link':
    		 'prefix': 'wp__rm_img_lnk'
@@ -550,68 +566,44 @@
           add_action('admin_init', 'rbtm_imagelink_setup', 10);
           // https://www.daddydesign.com/wordpress/how-to-change-the-default-attachment-display-settings-in-wordpress-without-a-plugin/
    		   """
-   		 'description': 'Remove Default Image Links in WP Options.php (Default Attachment Display Settings)'
+   		 'description': 'Remove Default Image Links in WP Options.php (Default Attachment Display Settings) = admin_init'
    		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
    'WP More Author Info in Post':
    		 'prefix': 'wp__add_authorinfo'
    		 'body': """
-          function rbtm_author_info_box($content)
-          {
-           global $post;
-
-           // Detect if it is a single post with a post author
-           if (is_single() && isset($post->post_author)) {
-
-          // Get author's display name
-               $display_name = get_the_author_meta('display_name', $post->post_author);
-
-               // If display name is not available then use nickname as display name
-               if (empty($display_name)) {
-                   $display_name = get_the_author_meta('nickname', $post->post_author);
-               }
-
-               // Get author's biographical information or description
-               $user_description = get_the_author_meta('user_description', $post->post_author);
-
-               // Get author's website URL
-               $user_website = get_the_author_meta('url', $post->post_author);
-
-               // Get link to the author archive page
-               $user_posts = get_author_posts_url(get_the_author_meta('ID', $post->post_author));
-
-               if (! empty($display_name)) {
-                   $author_details = '<p class="author_name">About ' . $display_name . '</p>';
-               }
-
-               if (! empty($user_description)) {
-                   // Author avatar and bio
-
-                   $author_details .= '<p class="author_details">' . get_avatar(get_the_author_meta('user_email'), 90) . nl2br($user_description). '</p>';
-               }
-
-               $author_details .= '<p class="author_links"><a href="'. $user_posts .'">View all posts by ' . $display_name . '</a>';
-
-               // Check if author has a website in their profile
-               if (! empty($user_website)) {
-
-          // Display author website link
-                   $author_details .= ' | <a href="' . $user_website .'" target="_blank" rel="nofollow">Website</a></p>';
-               } else {
-                   // if there is no author website then just close the paragraph
-                   $author_details .= '</p>';
-               }
-
-               // Pass all this info to post content
-               $content = $content . '<footer class="author_bio_section" >' . $author_details . '</footer>';
-           }
-           return $content;
-          }
-
-          // Add our function to the post content filter
-          add_action('the_content', 'rbtm_author_info_box');
-
-          // Allow HTML in author bio section
-          remove_filter('pre_user_description', 'wp_filter_kses');
+           function rbtm_author_info_box($content)
+            {
+            global $post;
+            // Detect if it is a single post with a post author
+            if (is_single() && isset($post->post_author)) {
+              $display_name = get_the_author_meta('display_name', $post->post_author);
+              if (empty($display_name)) {
+                  $display_name = get_the_author_meta('nickname', $post->post_author);
+              }
+              $user_description = get_the_author_meta('user_description', $post->post_author);
+              $user_website = get_the_author_meta('url', $post->post_author);
+              $user_posts = get_author_posts_url(get_the_author_meta('ID', $post->post_author));
+              if (! empty($display_name)) {
+                  $author_details = '<p class="author_name">About ' . $display_name . '</p>';
+              }
+              if (! empty($user_description)) {
+                  // Author avatar and bio
+                  $author_details .= '<p class="author_details">' . get_avatar(get_the_author_meta('user_email'), 90) . nl2br($user_description). '</p>';
+              }
+              $author_details .= '<p class="author_links"><a href="'. $user_posts .'">View all posts by ' . $display_name . '</a>';
+              if (! empty($user_website)) {
+                  $author_details .= ' | <a href="' . $user_website .'" target="_blank" rel="nofollow">Website</a></p>';
+              } else {
+                  $author_details .= '</p>';
+              }
+              $content = $content . '<footer class="author_bio_section" >' . $author_details . '</footer>';
+            }
+            return $content;
+            }
+            // Add our function to the post content filter
+            add_action('the_content', 'rbtm_author_info_box');
+            // Allow HTML in author bio section
+            remove_filter('pre_user_description', 'wp_filter_kses');
 
           /*
           .author_bio_section{
@@ -634,14 +626,14 @@
           *  add this to your CSS
           */
    		   """
-   		 'description': 'Add a multi-author Info Box at the end of Posts '
+   		 'description': 'Add a multi-author Info Box at the end of Posts = pre_user_description'
    		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
    'WP Disable XML-RPC':
    		 'prefix': 'wp__rm_xml-rpc'
    		 'body': """
           add_filter('xmlrpc_enabled', '__return_false');
    		   """
-   		 'description': 'Disable XML-RPC in WordPress - XML-RPC is a method that allows third party apps to communicate w/ WP site remotely. A potential security issue!'
+   		 'description': 'Disable XML-RPC in WordPress - XML-RPC is a method that allows third party apps to communicate w/ WP site remotely. A potential security issue! = xmlrpc_enabled'
    		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
    'WP Link Featured Image':
    		 'prefix': 'wp__link_img_post'
@@ -657,5 +649,193 @@
           }
           add_filter('post_thumbnail_html', 'rbtm_autolink_featured_images', 10, 3);
    		   """
-   		 'description': 'Automatically Link Featured Images to Posts'
+   		 'description': 'Automatically Link Featured Images to Posts = post_thumbnail_html'
    		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   'WP Capable to upload Image':
+  		 'prefix': 'wp__capab_upl_role'
+  		 'body': """
+         // check https://codex.wordpress.org/Roles_and_Capabilities
+          if ( current_user_can('contributor') && !current_user_can('upload_files') )
+            add_action('admin_init', 'allow_contributor_uploads');
+            function allow_contributor_uploads() {
+                 $contributor = get_role('contributor');
+                 $contributor->add_cap('upload_files');
+          }
+          //to check if it works
+          /* add_action('wp_footer', function() {
+             $contribx = wp_get_current_user();
+             echo "checkz: ";var_dump($contribx);
+          }); */
+  		   """
+  		 'description': 'Allow Contributors Role to add the capability to upload images = admin_init'
+  		 'descriptionMoreURL': 'https://themeisle.com/blog/code-snippets-for-wordpress/'
+   'WP Count View of Post':
+  		 'prefix': 'wp__count_view_post'
+  		 'body': """
+           function rbtm_count_post_visits() {
+             if( is_single() ) {
+                 global $post;
+                 $mymetakey = 'my_post_viewed'; // The meta key to retrieve / create to keep track # of visits.
+                 $views = get_post_meta( $post->ID, $mymetakey, true );
+                 if( $views == '' ) {
+                     update_post_meta( $post->ID, $mymetakey, '1' ); // add key if doesn't exist
+                 } else {
+                     $views_no = intval( $views );
+                     update_post_meta( $post->ID, $mymetakey, ++$views_no ); // increment the count
+                 }
+             }
+            }
+            add_action( 'wp_head', 'rbtm_count_post_visits' );
+
+             /* // add this to any template files to know the most viewed post
+            $myarg = array(
+            'posts_per_page' => 3,
+            'meta_key' => 'my_post_viewed',
+            'orderby' => 'meta_value_num', // https://codex.wordpress.org/Class_Reference/WP_Query
+            'order'=> 'DESC'
+            );
+            $myloop = new WP_Query($myarg);
+            while ($myloop->have_posts()):
+            $myloop->the_post();
+            // Loop continues
+            endwhile;
+            wp_reset_query(); */
+
+  		   """
+  		 'description': 'Show Popular or Most Viewed Posts by adding a custom meta data to count views = wp_head'
+  		 'descriptionMoreURL': 'https://themeisle.com/blog/code-snippets-for-wordpress/'
+   'WP Security Malicious Requests':
+   		 'prefix': 'wp__secur_site'
+   		 'body': """
+           global $user_ID; if($user_ID) {
+           if(!current_user_can('administrator')) {
+               if (strlen($_SERVER['REQUEST_URI']) > 255 ||
+                   stripos($_SERVER['REQUEST_URI'], "eval(") ||
+                   stripos($_SERVER['REQUEST_URI'], "CONCAT") ||
+                   stripos($_SERVER['REQUEST_URI'], "UNION+SELECT") ||
+                   stripos($_SERVER['REQUEST_URI'], "base64")) {
+                       @header("HTTP/1.1 414 Request-URI Too Long");
+                       @header("Status: 414 Request-URI Too Long");
+                       @header("Connection: Close");
+                       @exit;
+               }
+             }
+            }
+   		   """
+   		 'description': 'Protect Your Site from Malicious Requests'
+   		 'descriptionMoreURL': 'https://themeisle.com/blog/code-snippets-for-wordpress/'
+   'WP Add Pagination':
+   		 'prefix': 'wp__paginate_pg'
+   		 'body': """
+          global $wp_query;
+          $total = $wp_query->max_num_pages;
+          // only bother with the rest if we have more than 1 page!
+          if ( $total > 1 )  {
+            // get the current page
+            if ( !$current_page = get_query_var('paged') )
+                 $current_page = 1;
+            // structure of "format" depends on whether we're using pretty permalinks
+            $format = empty( get_option('permalink_structure') ) ? '&page=%#%' : 'page/%#%/';
+            echo paginate_links(array(
+                 'base' => get_pagenum_link(1) . '%_%',
+                 'format' => $format,
+                 'current' => $current_page,
+                 'total' => $total,
+                 'mid_size' => 4,
+                 'type' => 'list'
+            ));
+          }
+   		   """
+   		 'description': 'Paginate Your Site Without Plugins'
+   		 'descriptionMoreURL': 'https://themeisle.com/blog/code-snippets-for-wordpress/'
+   'WP Disable Admin Bar':
+   		 'prefix': 'wp__rm_bar_admin'
+   		 'body': """
+          // Remove the admin bar from the front end
+          add_filter( 'show_admin_bar', '__return_false' );
+   		   """
+   		 'description': 'Disable the Admin Bar if you find no use for it'
+   		 'descriptionMoreURL': 'https://themeisle.com/blog/code-snippets-for-wordpress/'
+   'WP Show Thumbnails Post Feeds':
+   		 'prefix': 'wp__rss_thumb'
+   		 'body': """
+          // Put post thumbnails into rss feed
+          function rbtm_feed_post_thumbnail($content)
+          {
+           global $post;
+           if (has_post_thumbnail($post->ID)) {
+               $content = '' . $content; //??? - not sure
+               // $content = get_the_post_thumbnail() . $content; //my code to add thumbnail
+           }
+           return $content;
+          }
+          add_filter('the_excerpt_rss', 'rbtm_feed_post_thumbnail');
+          add_filter('the_content_feed', 'rbtm_feed_post_thumbnail');
+   		   """
+   		 'description': 'Show Post Thumbnails in RSS Feed = the_excerpt_rss & the_content_feed'
+   		 'descriptionMoreURL': 'https://themeisle.com/blog/code-snippets-for-wordpress/'
+   'WP Change Author Permalink':
+   		 'prefix': 'wp__perma_au'
+   		 'body': """
+         function cng_author_base() {
+           global $wp_rewrite;
+           $author_slug = 'profile'; // change slug name
+           $wp_rewrite->author_base = $author_slug;
+          }
+          add_action('init', 'cng_author_base');
+   		   """
+   		 'description': 'Change the Author Permalink Structure = init'
+   		 'descriptionMoreURL': 'https://themeisle.com/blog/code-snippets-for-wordpress/'
+   'WP Twitter Link Username':
+   		 'prefix': 'wp__twit_lnk_user'
+   		 'body': """
+
+          function content_twitter_mention($content) {
+             return preg_replace('/([^a-zA-Z0-9-_&])@([0-9a-zA-Z_]+)/', "\\$1<a href=/\"http://twitter.com/\\$2/\" target=/\"_blank/\" rel=/\"nofollow/\">@\\$2</a>", $content);
+             // just replace  "/\" with "\" on the 2nd argument to make it work
+          }
+          add_filter('the_content', 'content_twitter_mention');
+          add_filter('comment_text', 'content_twitter_mention');
+
+   		   """
+   		 'description': 'Auto Link to Twitter Usernames in Content = the_content & comment_text'
+   		 'descriptionMoreURL': 'https://themeisle.com/blog/code-snippets-for-wordpress/'
+   'WP PayPal Donation Shortcode':
+   		 'prefix': 'wp__paypal_shortc'
+   		 'body': """
+         function donate_shortcode($atts, $content = null)
+         {
+             global $post;
+             $myemail = "example1@gmail.com";
+             extract(shortcode_atts(array(
+                 // 'account' => 'your-paypal-email-address',
+                 'account' => $myemail,
+                 'for' => $post->post_title,
+                 'onHover' => '',
+             ), $atts));
+             if (empty($content)) {
+                 $content='Make A Donation';
+             }
+             return '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business='.$account.'&item_name=Donation for '.$for.'" target="_blank" title="'.$onHover.'">'.$content.'</a>';
+         }
+         add_shortcode('donate', 'donate_shortcode');
+   		   """
+   		 'description': 'Create a PayPal Donation Shortcode'
+   		 'descriptionMoreURL': 'https://themeisle.com/blog/code-snippets-for-wordpress/'
+   'WP Change Template':
+   		 'prefix': 'wp__tpl_switch'
+   		 'body': """
+           add_action( 'wp', 'rbtm_switch_template', 3 );
+           function rbtm_switch_template(){
+               if ( is_page_template( '_fullwidth.php' ) ) {
+                 if( true ) // put condition here
+                  locate_template( array( 'some-other-template.php' ), true );
+                 else
+                  return;
+                 }
+               else
+                   return;
+           }
+   		   """
+   		 'description': 'Change or switch to another template if a condition is met = wp'
+   		 'descriptionMoreURL': 'https://wordpress.stackexchange.com/questions/62591/what-filter-or-action-hook-to-use-in-order-to-load-some-code-before-the-template'
