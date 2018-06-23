@@ -36,9 +36,33 @@
 
 
 ##### ------------ CSS Snippet --------------------------
+
+
+
 '.source.css':
+   'V-Align Div':
+     'prefix': 'css__align-vdiv'
+     'body': """
+        div.btn-wrap {
+          position: relative;
+          display: block;
+          text-align: center;
+          width: 100%;
+        }
+       """
+     'description': 'CSS vertically aligns an element inside div'
+   'H-Align Flex':
+     'prefix': 'css__align-flex'
+     'body': """
+        div.img-wrap {
+          flex: 0 1 auto;
+          display: flex;
+          flex-direction: column
+        }
+       """
+     'description': 'CSS horizontally aligns an image inside div using flex'
    'V-Align Any Elem':
-     'prefix': 'css__vaae'
+     'prefix': 'css__align-vae'
      'body': """
       $0 .element {
         position: relative;
@@ -48,7 +72,7 @@
        """
      'description': 'CSS vertically aligns any Element'
    'V-Align Element Table':
-     'prefix': 'css__vatc'
+     'prefix': 'css__align-vtc'
      'body': """
       $0 .element {
         display: table-cell;
@@ -79,7 +103,32 @@
           }
        """
      'description': 'CSS smoothing font'
-
+   'CSS Content Line':
+     'prefix': 'css__content_line'
+     'body': """
+        p::after {
+          position: absolute;
+          left: 50%;
+          bottom: 0;
+          width: 115px;
+          height: 1px;
+          margin: 0 0 0 -25px;
+          background: #120f90;
+          content: "-**-";
+          color: red;
+          text-align: center;
+        }
+        /* make sure <p> is relative followed by absolute after or before */
+       """
+     'description': 'CSS Before or After Content of Element Line Design'
+ 	 'CSS Boxshadow':
+     'prefix': 'css__boxsh'
+     'body': """
+        img:hover {
+          box-shadow: 0.2rem 0.2rem 0.5rem 0.2rem rgba(0, 0, 0, 0.25);
+        }
+       """
+     'description': 'My Box Shadow Setting for Images'
  ##### ------------ HTML Snippet --------------------------
  '.text.html.basic':
     'Widget Title':
@@ -479,12 +528,25 @@
    		 'description': 'If forgotten credentials, add an Admin User in WordPress instantly. Remove code afterwards = init'
    		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
    'WP Remove Welcome Admin':
-   		 'prefix': 'wp__rm_welcom'
+   		 'prefix': 'wp__rm_action'
    		 'body': """
-          remove_action('welcome_panel', 'wp_welcome_panel');
+          function RBTM_crappy_crap(){
+            remove_action('wmhook_loop_food_menu_postslist_before','wm_jetpack_food_menu_loop_section_display_menu_page', 10);
+            remove_action('wmhook_loop_food_menu_postslist_before','wm_jetpack_food_menu_loop_section_display_front_page', 10);
+            remove_action('welcome_panel', 'wp_welcome_panel'); // note you can Remove Welcome Panel from WP Dashboard
+          }
+          add_action('wp_footer', 'RBTM_crappy_crap', 10);
+
+          //
+          /*  https://www.screencast.com/t/rzNdQlJK06D - code remove_action()
+           * 1. Hook must be in the same component (e.g. Non-core as shown in plugin: Query Monitor)
+           *    note: all "before" hooks work but not all hooks "after", just the ones "nearer" to that hook or the farthest is 'wp_footer' hook
+           *    https://www.screencast.com/t/4l1SseGXwNBM - hook functions removed
+           *    https://www.screencast.com/t/oXoD29p9WY -  hook functions before removal
+           */
    		   """
-   		 'description': 'Remove Welcome Panel from WP Dashboard = welcome_panel'
-   		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
+   		 'description': 'points in action hook sequence & the functions attached to it - & also how to remove it = wp_footer'
+   		 'descriptionMoreURL': 'https://developer.wordpress.org/?s=remove_action'
    'WP Count Total Users':
    		 'prefix': 'wp__user_count_a'
    		 'body': """
@@ -502,7 +564,7 @@
    		 'description': 'Show Total Count Number of Registered Users in WordPress = user_count'
    		 'descriptionMoreURL': 'http://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/'
    'WP Exclude Category in Feeds':
-   		 'prefix': 'wp__rss_excl_cat'
+   		 'prefix': 'wp__query_rss_exccat'
    		 'body': """
          function rbtm_exclude_category($query) {
              if ( $query->is_feed ) {
@@ -839,3 +901,472 @@
    		   """
    		 'description': 'Change or switch to another template if a condition is met = wp'
    		 'descriptionMoreURL': 'https://wordpress.stackexchange.com/questions/62591/what-filter-or-action-hook-to-use-in-order-to-load-some-code-before-the-template'
+  	'WP Query Post Meta Event':
+  		 'prefix': 'wp__query_postmeta_e'
+  		 'body': """
+
+            function be_event_query( $query ) {
+
+            	if( $query->is_main_query() && !$query->is_feed() && !is_admin() && $query->is_post_type_archive( 'event' ) ) {
+            		$meta_query = array(
+            			array(
+            				'key' => 'be_events_manager_end_date',
+            				'value' => time(),
+            				'compare' => '>'
+            			)
+            		);
+            		$query->set( 'meta_query', $meta_query );
+            		$query->set( 'orderby', 'meta_value_num' );
+            		$query->set( 'meta_key', 'be_events_manager_start_date' );
+            		$query->set( 'order', 'ASC' );
+            		$query->set( 'posts_per_page', '4' );
+            	}
+            }
+            add_action( 'pre_get_posts', 'be_event_query' );
+
+  		   """
+  		 'description': 'Customize Event Query using Post Meta = pre_get_posts'
+  		 'descriptionMoreURL': 'https://www.billerickson.net/customize-the-wordpress-query/'
+  	'WP Query Main & Category CPT':
+  		 'prefix': 'wp__query_cpt'
+  		 'body': """
+
+            function func_query_cpt( $query ) {
+               if ( is_home() && $query->is_main_query() ) {
+
+                 $query->set( 'post_type', array( 'post', 'my_custom_post_type') );
+                 return $query;
+
+               }
+             //or include in category
+              if ( is_category('category-slug') && $query->is_main_query() ) {
+
+                 $query->set( 'post_type', 'my_custom_post_type' );
+                 return $query;
+
+               }
+            }
+            add_action( 'pre_get_posts', 'func_query_cpt' );
+
+  		   """
+  		 'description': 'Include Custom Post Types On Your Main Blog Page & also Specific Category Archive Page = pre_get_posts'
+  		 'descriptionMoreURL': 'https://premium.wpmudev.org/blog/creating-custom-queries-wordpress/'
+  	'WP Query basic loop':
+  		 'prefix': 'wp__query_loop_basic'
+  		 'body': """
+          //https://digwp.com/2011/09/3-ways-to-reset-the-wordpress-loop/
+          if  ( is_front_page() && is_main_query()) {
+
+            $args = array(
+                'post_type' => 'post',
+            );
+            // the query
+            $query = new WP_Query( $args );
+
+            // The Loop
+            if ( $query->have_posts() ) :
+              while ( $query->have_posts() ) : $query->the_post();
+            	// contents of the Loop go here
+
+              endwhile;
+              wp_reset_postdata(); /* Restore original Post Data */
+            endif;
+          }
+
+  		   """
+  		 'description': 'WP_Query Basic Loop'
+  		 'descriptionMoreURL': 'https://premium.wpmudev.org/blog/creating-custom-queries-wordpress/'
+  	'WP Query Nested Loop':
+  		 'prefix': 'wp__query_loop_nested'
+  		 'body': """
+                 //https://digwp.com/2011/09/3-ways-to-reset-the-wordpress-loop/
+              $args = array(
+                'post_type' => 'my_cpt',
+            );
+            // the query
+            $query = new WP_Query( $args );
+            // The Loop
+            if ( $query->have_posts() ) :
+              while ( $query->have_posts() ) : $query->the_post();
+                  // Some code here...
+            	    // another relation   WP Query (taxonomy)
+                      $term_taxonomy_id = get_post_meta(get_the_ID(), 'course_pack', true)['term_taxonomy_id'];
+                      $args = array(
+                        'tax_query' => array(
+                          array(
+                            'terms'=>array($term_taxonomy_id),
+                          ),
+                        ),
+                      );
+                      // the query
+                      $subquery = new WP_Query( $args );
+                      // The Loop
+                      if ( $subquery->have_posts() ) :
+                        while ( $subquery->have_posts() ) : $subquery->the_post();
+                          // Some code here...
+
+                        endwhile;
+                        $subquery->reset_postdata(); /* Restore original Post Data */
+                      endif;
+                // Some code here...
+              endwhile;
+              wp_reset_postdata(); /* Restore original Post Data */
+            endif;
+  		   """
+  		 'description': 'WP_Query Nested Loop'
+  		 'descriptionMoreURL': 'https://wordpress.stackexchange.com/questions/126346/resetting-post-data-to-previous-loop-in-nested-loops'
+  	'WP Query Get Pages':
+  		 'prefix': 'wp__query_get_pages'
+  		 'body': """
+
+            <?php
+            $args = array(
+             'parent' => 0,
+             'sort_order' => 'ASC',
+             'sort_column' => 'post_title',
+            );
+            // get posts
+            $pages = get_pages( $args );
+            // check if any posts are returned
+            if ( $pages ) { ?>
+             <ul class="sidebar-pages">
+
+             <?php foreach ( $pages as $page ) { ?>
+             <li>
+             <a href="<?php echo get_page_link( $page->ID ); ?>">
+             <?php echo $page->post_title; ?>
+             </a>
+             </li>
+             <?php } ?>
+
+             </ul>
+            <?php } ?>
+  		   """
+  		 'description': 'Display pages only similar to WP_Query'
+  		 'descriptionMoreURL': 'https://premium.wpmudev.org/blog/creating-custom-queries-wordpress/'
+  	'WP Query Get Posts':
+  		 'prefix': 'wp__query_get_posts'
+  		 'body': """
+
+            <?php
+            $args = array(
+             'posts_per_page' => '4',
+             'exclude' => array( $post->ID )
+            );
+            // get posts
+            $posts = get_posts( $args );
+            // check if any posts are returned
+            if ( $posts ) { ?>
+             <section class="recent-posts clear">
+             <?php foreach ($posts as $post ) { ?>
+
+               <?php setup_postdata( $post ); ?>
+               <article id="post-<?php the_ID(); ?>" <?php post_class( 'left' ); ?>>
+                 <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
+                 <?php post_thumbnail( 'thumbnail' );?>
+                 </a>
+                 <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
+                 <?php the_title(); ?>
+                 </a>
+               </article>
+
+             <?php } ?>
+             </section>
+
+            <?php }
+            wp_reset_postdata(); /* Restore original Post Data */
+            ?>
+
+  		   """
+  		 'description': 'Display post only similar to WP_Query'
+  		 'descriptionMoreURL': 'https://premium.wpmudev.org/blog/creating-custom-queries-wordpress/'
+  	'WP Meta Query Nested':
+  		 'prefix': 'wp__query_meta_arg'
+  		 'body': """
+         //https://developer.wordpress.org/reference/classes/wp_query/#methods-and-properties
+         //if(('size'=='xl' && 'color'=='green') || ('size' < 100 && 'size' > 50)) {}
+          $args = array(
+             'post_type' => 'post',
+             'posts_per_page' => '3',
+             'meta_key' => 'key',
+             'meta_value' => 'value',
+             'meta_value_num' => 10,
+             'posts_per_page' => '3',
+             'meta_compare' => '=',
+             'meta_query' => array(
+                  'relation' => 'OR', //default &&
+                  array(
+                    'relation' => 'AND', //default &&
+                    array(
+                      'key'=>'size',
+                      'value'=>'xl',
+                      'type'=>'CHAR',
+                      'compare'=>'=',
+                    ),
+                    array(
+                      'key'=>'color',
+                      'value'=>'green',
+                      'type'=>'CHAR',
+                      'compare'=>'=',
+                    ),
+                  ),
+                  array(
+                    'key'=>'size',
+                    'value'=> array(50,100),
+                    'type'=>'NUMERIC',
+                    'compare'=>'BETWEEN',
+                  )
+              ),
+
+            );
+  		   """
+  		 'description': 'Meta Query Nested Argument Sample 1'
+  		 'descriptionMoreURL': 'https://www.youtube.com/watch?v=v8IkotRDg4Q&index=5&list=PLUBR53Dw-Ef8RvXF4iEU6UnhOlrcfIYn6'
+  	'WP Query Taxonomy':
+  		 'prefix': 'wp__query_tax_arg'
+  		 'body': """
+          //https://codex.wordpress.org/Class_Reference/WP_Query#Taxonomy_Parameters
+          $args = array(
+              'post_type' => 'post',
+              'posts_per_page' => -1,
+              'tax_query' => array(
+                  'relation' => 'OR', //default &&
+                  array(
+                    'taxonomy'=>'genre',
+                    'field'=> 'term_id',
+                    'terms'=>array(33,35),
+                    'include_children'=>true,
+                    'operator'=>'NOT IN',
+                  ),
+                  array(
+                    'taxonomy'=>'category',
+                    'field'=> 'slug',
+                    'terms'=>array('ruby','joomla','drupal'),
+                    'include_children'=>true,
+                    'operator'=>'AND',
+                  )
+              ),
+            );
+  		   """
+  		 'description': 'Tax Query (Taxonomy) Argument Sample'
+  		 'descriptionMoreURL': 'https://www.billerickson.net/code/wp_query-arguments/'
+  	'WP Query Post & Page ':
+  		 'prefix': 'wp__query_post_page_arg'
+  		 'body': """
+          $args = array(
+          		'p' => 1,                               //(int) - use post id.
+          		'name' => 'hello-world',                //(string) - use post slug.
+          		'page_id' => 1,                         //(int) - use page id.
+          		'pagename' => 'sample-page',            //(string) - use page slug.
+          		'pagename' => 'contact_us/canada',      //(string) - Display child page using the slug of the parent and the child page, separated ba slash
+          		'post_parent' => 1,                     //(int) - use page id. Return just the child Pages. (Only works with heirachical post types.)
+          		'post_parent__in' => array(1,2,3),       //(array) - use post ids. Specify posts whose parent is in an array. NOTE: Introduced in 3.6
+          		'post_parent__not_in' => array(1,2,3),  //(array) - use post ids. Specify posts whose parent is not in an array.
+          		'post__in' => array(1,2,3),             //(array) - use post ids. Specify posts to retrieve. ATTENTION If you use sticky posts, they will be included (prepended!) in the posts you retrieve whether you want it or not. To suppress this behaviour use ignore_sticky_posts
+          		'post__not_in' => array(1,2,3),         //(array) - use post ids. Specify post NOT to retrieve.
+            );
+  		   """
+  		 'description': 'Post & Page Parameters or Argument - Display content based on post and page parameters'
+  		 'descriptionMoreURL': 'https://www.billerickson.net/code/wp_query-arguments/'
+  	'WP Query Tag Argument ':
+  		 'prefix': 'wp__query_tag_arg'
+  		 'body': """
+            $args = array(
+            	'tag' => 'cooking',                       //(string) - use tag slug.
+            	'tag_id' => 5,                            //(int) - use tag id.
+            	'tag__and' => array( 2, 6),               //(array) - use tag ids.
+            	'tag__in' => array( 2, 6),                //(array) - use tag ids.
+            	'tag__not_in' => array( 2, 6),            //(array) - use tag ids.
+            	'tag_slug__and' => array( 'red', 'blue'), //(array) - use tag slugs.
+            	'tag_slug__in' => array( 'red', 'blue'),  //(array) - use tag slugs.
+            );
+  		   """
+  		 'description': 'Tag Parameters - Show posts associated with certain tags'
+  		 'descriptionMoreURL': 'https://www.billerickson.net/code/wp_query-arguments/'
+  	'WP Query Category Arg ':
+  		 'prefix': 'wp__query_cat_arg'
+  		 'body': """
+          $args = array(
+            'cat' => 5,//(int) - use category id.
+            'category_name' => 'staff, news',          //(string) - Display posts that have these categories, using category slug.
+            'category_name' => 'staff+news',           //(string) - Display posts that have "all" of these categories, using category slug.
+            'category__and' => array( 2, 6 ),         //(array) - use category id.
+            'category__in' => array( 2, 6 ),          //(array) - use category id.
+            'category__not_in' => array( 2, 6 ),      //(array) - use category id.
+          );
+  		   """
+  		 'description': 'Category Parameters - Show posts associated with certain categories'
+  		 'descriptionMoreURL': 'https://www.billerickson.net/code/wp_query-arguments/'
+  	'WP Query Author Arg ':
+  		 'prefix': 'wp__query_author_arg'
+  		 'body': """
+            $args = array(
+            	'author' => '1,2,3,',                      //(int) - use author id [use minus (-) to exclude authors by ID ex. 'author' => '-1,-2,-3,']
+            	'author_name' => 'luetkemj',              //(string) - use 'user_nicename' (NOT name)
+            	'author__in' => array( 2, 6 ),            //(array) - use author id (available with Version 3.7).
+            	'author__not_in' => array( 2, 6 ),        //(array)' - use author id (available with Version 3.7).
+            );
+  		   """
+  		 'description': 'Author Parameters - Show posts associated with certain author'
+  		 'descriptionMoreURL': 'https://www.billerickson.net/code/wp_query-arguments/'
+  	'WP Query Post & Status Arg ':
+  		 'prefix': 'wp__query_post_stat_arg'
+  		 'body': """
+          $args = array(
+          	'post_type' => array(                   //(string / array) - use post types. Retrieves posts by Post Types, default value is 'post';
+          					'post',                         // - a post.
+          					'page',                         // - a page.
+          					'revision',                     // - a revision.
+          					'attachment',                   // - an attachment. The default WP_Query sets 'post_status'=>'published', but atchments default to 'post_status'=>'inherit' so you'll need to set the status to 'inherit' or 'any'.
+          					'my-post-type',                 // - Custom Post Types (e.g. movies)
+          					),
+          	'post_status' => array(                 //(string / array) - use post status. Retrieves posts by Post Status, default value i'publish'.
+                    'publish',                      // - a published post or page.
+                    'pending',                      // - post is pending review.
+                    'draft',                        // - a post in draft status.
+                    'auto-draft',                   // - a newly created post, with no content.
+                    'future',                       // - a post to publish in the future.
+                    'private',                      // - not visible to users who are not logged in.
+                    'inherit',                      // - a revision. see get_children.
+                    'trash'                         // - post is in trashbin (available with Version 2.9).
+                    ),
+          );
+  		   """
+  		 'description': 'Type & Status Parameters - Show posts associated with certain type or status'
+  		 'descriptionMoreURL': 'https://www.billerickson.net/code/wp_query-arguments/'
+  	'WP Query Pagination Arg ':
+  		 'prefix': 'wp__query_pagin_arg'
+  		 'body': """
+            $args = array(
+            	'posts_per_page' => 10,                 //(int) - number of post to show per page (available with Version 2.1). Use 'posts_per_page'=1 to show all posts (the 'offset' parameter is ignored with a -1 value). Note if the query is in a feed, wordpress overwrites this parameter with the stored 'posts_per_rss' option. Treimpose the limit, try using the 'post_limits' filter, or filter 'pre_option_posts_per_rss' and return -1
+            	'posts_per_archive_page' => 10,         //(int) - number of posts to show per page - on archive pages only. Over-rides showposts anposts_per_page on pages where is_archive() or is_search() would be true
+            	'nopaging' => false,                    //(bool) - show all posts or use pagination. Default value is 'false', use paging.
+            	'paged' => get_query_var('paged'),      //(int) - number of page. Show the posts that would normally show up just on page X when usinthe "Older Entries" link.
+            																					//NOTE: Use get_query_var('page'); if you want your query to work in a Page template that you've set as your static front page. The query variable 'page' holds the pagenumber for a single paginated Post or Page that includes the <!--nextpage--> Quicktag in the post content.
+            																					// This whole paging thing gets tricky. Some links to help you out:
+            																					// http://codex.wordpress.org/Function_Reference/next_posts_link#Usage_when_querying_the_loop_with_WP_Query
+            																					// http://codex.wordpress.org/Pagination#Troubleshooting_Broken_Pagination
+            	'offset' => 3,                          // (int) - number of post to displace or pass over.
+            																					// Warning: Setting the offset parameter overrides/ignores the paged parameter and breaks pagination. for a workaround see: http://codex.wordpress.org/Making_Custom_Queries_using_Offset_and_Pagination
+            																					// The 'offset' parameter is ignored when 'posts_per_page'=>-1 (show all posts) is used.
+            	'page' => get_query_var('page'),        // (int) - number of page for a static front page. Show the posts that would normally show up just on page X of a Static Front Page.
+            																					//NOTE: The query variable 'page' holds the pagenumber for a single paginated Post or Page that includes the <!--nextpage--> Quicktag in the post content.
+            	'ignore_sticky_posts' => false,         // (boolean) - ignore sticky posts or not (available with Version 3.1, replaced caller_get_posts parameter). Default value is 0 - don't ignore sticky posts. Note: ignore/exclude sticky posts being included at the beginning of posts returned, but the sticky post will still be returned in the natural order of that list of posts returned.
+            );
+  		   """
+  		 'description': 'WP Query Pagination Parameters'
+  		 'descriptionMoreURL': 'https://www.billerickson.net/code/wp_query-arguments/'
+  	'WP Query Orderby Arg ':
+  		 'prefix': 'wp__query_order_arg'
+  		 'body': """
+            $args = array(
+            	'order' => 'DESC',                      //(string) - Designates the ascending or descending order of the 'orderby' parameter. Default to 'DESC'.
+            																						//Possible Values:
+            																						//'ASC' - ascending order from lowest to highest values (1, 2, 3; a, b, c).
+            																						//'DESC' - descending order from highest to lowest values (3, 2, 1; c, b, a).
+            	'orderby' => 'date',                    //(string) - Sort retrieved posts by parameter. Defaults to 'date'. One or more options can be passed. EX: 'orderby' => 'menu_order title'
+            																						//Possible Values:
+            																						//'none' - No order (available with Version 2.8).
+            																						//'ID' - Order by post id. Note the captialization.
+            																						//'author' - Order by author.
+            																						//'title' - Order by title.
+            																						//'name' - Order by post name (post slug).
+            																						//'date' - Order by date.
+            																						//'modified' - Order by last modified date.
+            																						//'parent' - Order by post/page parent id.
+            																						//'rand' - Random order.
+            																						//'comment_count' - Order by number of comments (available with Version 2.9).
+            																						//'menu_order' - Order by Page Order. Used most often for Pages (Order field in the EdiPage Attributes box) and for Attachments (the integer fields in the Insert / Upload MediGallery dialog), but could be used for any post type with distinct 'menu_order' values (theall default to 0).
+            																						//'meta_value' - Note that a 'meta_key=keyname' must also be present in the query. Note alsthat the sorting will be alphabetical which is fine for strings (i.e. words), but can bunexpected for numbers (e.g. 1, 3, 34, 4, 56, 6, etc, rather than 1, 3, 4, 6, 34, 56 as yomight naturally expect).
+            																						//'meta_value_num' - Order by numeric meta value (available with Version 2.8). Also notthat a 'meta_key=keyname' must also be present in the query. This value allows for numericasorting as noted above in 'meta_value'.
+            																						//'title menu_order' - Order by both menu_order AND title at the same time. For more info see: http://wordpress.stackexchange.com/questions/2969/order-by-menu-order-and-title
+            																						//'post__in' - Preserve post ID order given in the post__in array (available with Version 3.5).
+            );
+  		   """
+  		 'description': 'WP Query Order & Orderby Parameters - Sort retrieved posts'
+  		 'descriptionMoreURL': 'https://www.billerickson.net/code/wp_query-arguments/'
+  	'WP Query Date Arg ':
+  		 'prefix': 'wp__query_date_arg'
+  		 'body': """
+            $args = array(
+            	'year' => 2014,                         //(int) - 4 digit year (e.g. 2011).
+            	'monthnum' => 4,                        //(int) - Month number (from 1 to 12).
+            	'w' =>  25,                             //(int) - Week of the year (from 0 to 53). Uses the MySQL WEEK command. The mode is dependenon the "start_of_week" option.
+            	'day' => 17,                            //(int) - Day of the month (from 1 to 31).
+            	'hour' => 13,                           //(int) - Hour (from 0 to 23).
+            	'minute' => 19,                         //(int) - Minute (from 0 to 60).
+            	'second' => 30,                         //(int) - Second (0 to 60).
+            	'm' => 201404,                          //(int) - YearMonth (For e.g.: 201307).
+            	'date_query' => array(                  //(array) - Date parameters (available with Version 3.7).
+            																						//these are super powerful. check out the codex for more comprehensive code examples http://codex.wordpress.org/Class_Reference/WP_Query#Date_Parameters
+            		array(
+            			'year' => 2014,                     //(int) - 4 digit year (e.g. 2011).
+            			'month' => 4,                        //(int) - Month number (from 1 to 12).
+            			'week' => 31,                        //(int) - Week of the year (from 0 to 53).
+            			'day' => 5,                          //(int) - Day of the month (from 1 to 31).
+            			'hour' => 2,                         //(int) - Hour (from 0 to 23).
+            			'minute' => 3,                       //(int) - Minute (from 0 to 59).
+            			'second' => 36,                      //(int) - Second (0 to 59).
+            			'after'     => 'January 1st, 2013', //(string/array) - Date to retrieve posts after. Accepts strtotime()-compatible string, or array of 'year', 'month', 'day'
+            			'before'    => array(               //(string/array) - Date to retrieve posts after. Accepts strtotime()-compatible string, or array of 'year', 'month', 'day'
+            				'year'  => 2013,                  //(string) Accepts any four-digit year. Default is empty.
+            				'month' => 2,                     //(string) The month of the year. Accepts numbers 1-12. Default: 12.
+            				'day'   => 28,                    //(string) The day of the month. Accepts numbers 1-31. Default: last day of month.
+            			),
+            			'inclusive' => true,                //(boolean) - For after/before, whether exact value should be matched or not'.
+            			'compare' =>  '=',                  //(string) - Possible values are '=', '!=', '>', '>=', '<', '<=', 'LIKE', 'NOT LIKE', 'IN', 'NOT IN', 'BETWEEN', 'NOT BETWEEN', 'EXISTS' (only in WP >= 3.5), and 'NOT EXISTS' (also only in WP >= 3.5). Default value is '='
+            			'column' => 'post_date',            //(string) - Column to query against. Default: 'post_date'.
+            			'relation' => 'AND',                //(string) - OR or AND, how the sub-arrays should be compared. Default: AND.
+            		),
+            	),
+            );
+  		   """
+  		 'description': 'WP Query Date Parameters - Show posts associated with a certain time and date period'
+  		 'descriptionMoreURL': 'https://www.billerickson.net/code/wp_query-arguments/'
+  	'WP Add Classes Body ':
+  		 'prefix': 'wp__body_class'
+  		 'body': """
+            function RBTM_body_classes($classes) {
+              // Adds a class whether a sidebar is in uses
+                if (is_active_sidebar( 'sidebar') || is_active_sidebar('frontpage') || is_active_sidebar('footer')) {
+                  $classes[] = 'has-sidebar';
+                } else {
+                  $classes[] = 'no-sidebar';
+                }
+                return $classes;
+            }
+            add_filter( 'body_class', 'RBTM_body_classes' );
+  		   """
+  		 'description': 'Adds class to Body Tag = body_class'
+  		 'descriptionMoreURL': 'https://developer.wordpress.org/reference/hooks/body_class/'
+  	'WP Add Classes Nav Menu ':
+  		 'prefix': 'wp__nav_menu_class'
+  		 'body': """
+            function add_specific_menu_location_atts( $atts, $item, $args, $depth ) {
+            //  var_dump( basename(get_permalink()));
+                if( $args->theme_location == 'primary' ) {
+                  // add the desired attributes:
+                  $atts['class'] = 'menu-link-class';
+                }
+                  // change menu links when not in frontpage for smooth scrolling
+                if(!is_front_page() && $args->theme_location == 'primary')   {
+                  switch ($atts['href']) {
+                      case '#top':
+                          $atts['href'] = get_home_url();
+                          break;
+                      case '#services':
+                          $atts['href'] = get_home_url().'#services';
+                          break;
+                      case '#about-menu':
+                          $atts['href'] = get_home_url().'#about-menu';
+                          break;
+                      default:
+                          break;
+                  }
+                }
+                return $atts;
+            }
+            add_filter( 'nav_menu_link_attributes', 'add_specific_menu_location_atts', 10, 4 );
+  		   """
+  		 'description': 'Adds class to Menu Navigation Tag = body_class'
+  		 'descriptionMoreURL': 'https://developer.wordpress.org/reference/hooks/nav_menu_link_attributes/'
