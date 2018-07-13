@@ -37,8 +37,6 @@
 
 ##### ------------ CSS Snippet --------------------------
 
-
-
 '.source.css':
    'V-Align Div':
      'prefix': 'css__align-vdiv'
@@ -84,6 +82,7 @@
    'Flex Sample One':
      'prefix': 'css__flex1'
      'body': """
+     //add to the div container of all images wrapper
       $0 .site-branding {
         display: flex;
         flex-direction: row;
@@ -91,6 +90,10 @@
         min-height: 65px;
         justify-content: center;
         text-align:center;
+      }
+      // for even spacing add next to image div.wrapper
+      .ngg-gallery-thumbnail-box {
+        margin: 0 auto;
       }
        """
      'description': 'A sample #1 of using flex'
@@ -103,10 +106,10 @@
           }
        """
      'description': 'CSS smoothing font'
-   'CSS Content Line':
-     'prefix': 'css__content_line'
+   'CSS Pseudo Elem':
+     'prefix': 'css__psuedo_elem'
      'body': """
-        p::after {
+        p:after {
           position: absolute;
           left: 50%;
           bottom: 0;
@@ -117,10 +120,27 @@
           content: "-**-";
           color: red;
           text-align: center;
+              /* background-image: url(' . get_bloginfo('stylesheet_directory') . '/images/custom-logo.png) !important; */
+              /* background-position: 0 0; */
         }
-        /* make sure <p> is relative followed by absolute after or before */
+        /* make sure <p> is relative followed by pseudo elem w/ "position: absolute"  */
+        nova_menu_item:before {
+            font-family: 'nova-font';
+            content: '\e603';
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            margin-bottom: 1rem;
+            line-height: 2rem;
+            text-align: center;
+            font-size: 1.38rem;
+            border-width: 1px;
+            border-style: solid;
+            border-radius: 50%;
+        }
+        /*unicode sample*/
        """
-     'description': 'CSS Before or After Content of Element Line Design'
+     'description': 'CSS Before or After Pseudo Element Example & Unicode'
  	 'CSS Boxshadow':
      'prefix': 'css__boxsh'
      'body': """
@@ -129,6 +149,111 @@
         }
        """
      'description': 'My Box Shadow Setting for Images'
+ 	 'CSS Padding color':
+     'prefix': 'css__pad_color'
+     'body': """
+          div {
+              padding:35px;
+              background-image:linear-gradient(to bottom, purple 0%, purple 100%), linear-gradient(to bottom, blue 0%, blue 100%);
+              background-clip: content-box, padding-box;
+          }
+       """
+     'description': 'Color for content and padding'
+     'descriptionMoreURL': 'http://jsfiddle.net/TyXRY/639/'
+ 	 'CSS Align Image':
+     'prefix': 'css__align_img'
+     'body': """
+        @media screen and (max-width: 649px) {
+          div.ngg-galleryoverview {
+            display: block !important;
+            text-align: center;
+            .ngg-gallery-thumbnail-box {
+              float: none;
+              display: inline-block;
+              margin: auto;
+            }
+          }
+        }
+       """
+     'description': 'Aligns image to center & behaves like float: left with margin auto.'
+     'descriptionMoreURL': 'http://jsfiddle.net/4xxvb/3/'
+ 	 'SASS Bootstrap4 Grid':
+     'prefix': 'sass__b4_grid_media'
+     'body': """
+        /*b4 grid  >=  < 576 768 992 1200 */
+        /* max-width */
+        $query_b4_xs5_mx: 359px;
+        $query_b4_xs_mx: 575px;
+        $query_b4_sm_mx: 767px;
+        $query_b4_md_mx: 991px;
+        $query_b4_lg_mx: 1199px;
+
+        /* min-width */
+        $query_b4_xs5: 360px;
+        $query_b4_sm: 576px;
+        $query_b4_md: 768px;
+        $query_b4_lg: 992px;
+        $query_b4_xl: 1200px;
+
+        @media screen and (min-width: 510px) {
+        }
+       """
+     'description': 'SASS Bootstrap 4 Grid variables sizes'
+     'descriptionMoreURL': 'http://jsfiddle.net/TyXRY/639/'
+ 	 'SASS Mixin Basic':
+     'prefix': 'sass__mixin_b'
+     'body': """
+          // Background Cover Mixin
+          @mixin background-cover {
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+
+          // Rem output with px fallback
+          @mixin font-size($sizeValue: 1) {
+          	font-size: ($sizeValue * 20) * 1px;
+          	font-size: $sizeValue * 1.25rem;
+          }
+
+          // Center block
+          @mixin center-block {
+          	display: block;
+          	margin-left: auto;
+          	margin-right: auto;
+          }
+
+          // Clearfix
+          @mixin clearfix() {
+          	content: "";
+          	display: table;
+          	table-layout: fixed;
+          }
+
+          // Clear after (not all clearfix need this also)
+          @mixin clearfix-after() {
+          	clear: both;
+          }
+
+          // font mixin script
+          /* default */
+          $font__main: sans-serif;
+          $font__serif: 'PT Serif',Georgia,Cambria,"Times New Roman",Times,serif;
+          $font__script: 'Kaushan Script', 'Helvetica Neue', Helvetica, Arial, cursive;
+          $font__body-font: 'Roboto Slab', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          $font__header-font: 'Source Sans Pro',"Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Arial,sans-serif;
+
+          @mixin font__script($font-set: false, $size: false, $colour: false, $weight: false,  $lh: false) {
+              @if $font-set == false { font-family: $font-family; } @else {font-family: $font-set;};
+          		@if $size == false { font-size: 1rem; } @else { font-size: $size+rem;}
+              @if $colour == false { color: black; }  @else { color: $colour}
+              @if $weight == false { font-weight: 300; }  @else { font-weight: $weight}
+              @if $lh == false { line-height: 1.5; }  @else {line-height: $lh}
+          }
+       """
+     'description': 'SASS Essential Mixin Basic'
+     'descriptionMoreURL': 'https://engageinteractive.co.uk/blog/top-10-scss-mixins'
  ##### ------------ HTML Snippet --------------------------
  '.text.html.basic':
     'Widget Title':
@@ -442,8 +567,10 @@
       'prefix': 'wp__hook_sequence'
       'body': """
         add_action( 'shutdown', function(){
+            $ii=0;
             foreach( $GLOBALS['wp_actions'] as $action => $count )
-                printf( '%s (%d) <br/>' . PHP_EOL, $action, $count );
+                printf( '[%d] %s (%d) <br/>' . PHP_EOL, ++$ii, $action, $count  );
+            // this stops depending on add_action hook being called forth, if you want the last hook - try 'shutdown'
         });
         // IMPORTANT NOTES:  //you can use the debug bar plugin / query monitor plugin
         // var_export - is similar to var_dump() but returns the deeper value (simple format)
@@ -1342,13 +1469,13 @@
   	'WP Add Classes Nav Menu ':
   		 'prefix': 'wp__nav_menu_class'
   		 'body': """
+            // add class for each nav link & change href when pages switch from frontpage to any
             function add_specific_menu_location_atts( $atts, $item, $args, $depth ) {
             //  var_dump( basename(get_permalink()));
                 if( $args->theme_location == 'primary' ) {
-                  // add the desired attributes:
                   $atts['class'] = 'menu-link-class';
                 }
-                  // change menu links when not in frontpage for smooth scrolling
+                  // change nav links when not in frontpage for smooth scrolling
                 if(!is_front_page() && $args->theme_location == 'primary')   {
                   switch ($atts['href']) {
                       case '#top':
@@ -1370,3 +1497,181 @@
   		   """
   		 'description': 'Adds class to Menu Navigation Tag = body_class'
   		 'descriptionMoreURL': 'https://developer.wordpress.org/reference/hooks/nav_menu_link_attributes/'
+  	'WP Widget Function ':
+  		 'prefix': 'wp__widg_func'
+  		 'body': """
+              // Function Reference/the widget
+               /* {widgets classname} - default classname is given if not set */
+           $args = array(
+             'before_widget' => '<div id="myidz" class="widget myclazz {widget classname} ">',
+             'after_widget' => '</div>',
+             'before_title' => '<h2 class="myclass widgettitle">',
+             'after_title' => '</h2>'
+           );
+           $instance1 = array(
+             'title' => 'My Tagtitle',
+             'taxonomy'  => 'nova_menu_item_label', //default: 'post_tag', 'category' also works
+           );
+            the_widget( 'WP_Widget_Tag_Cloud', $instance1, $args);
+
+             $instance2 = array(
+             'title' => 'My Texttitle',
+             'text'  => '</i>My Text Content</i><small>hello</small>',
+           );
+            the_widget( 'WP_Widget_Text', $instance2, $args);
+  		   """
+  		 'description': 'template tag displays an arbitrary widget outside of a sidebar. It can be used anywhere in templates.'
+  		 'descriptionMoreURL': 'https://codex.wordpress.org/Function_Reference/the_widget#Categories_widget'
+  	'WP Widget Meta Login':
+  		 'prefix': 'wp__widg_login'
+  		 'body': """
+            <ul>
+              <?php
+            // $getusers = get_users(array('count_total'  => false ));
+             $now_user = wp_get_current_user();
+             // $userdata = get_userdata(3);
+             // $getuserby = get_user_by('ID', '3');
+             // $getbypath = get_permalink(get_page_by_path($slug));
+              ?>
+                <?php if (is_user_logged_in()) { ?>
+                <li><a href="#">Hi! <?php echo strtoupper($now_user->data->display_name); ?></a></li>
+                <li><a href="<?php echo wp_logout_url(get_permalink()); ?>">Logout</a></li>
+                <?php
+                    } else {  ?>
+                  <li><a href="<?php echo wp_login_url(home_url()); ?>" title="Login">Login</a></li>
+                  <?php } ?>
+                    <li><a href="<?php echo get_site_url().'/feed'; ?>" title="Entries RSS">Entries RSS</a></li>
+                    <li><a href="<?php echo get_site_url().'/comments/feed';?>" title="Comments RSS">Comments RSS</a></li>
+                    <li><a href="<?php echo get_site_url(); ?>" title="Visit">Visit Us</a></li>
+            </ul>
+  		   """
+  		 'description': 'Widget Meta Login for User '
+  	'WP Widget Taxonomy ':
+       'prefix': 'wp__widg_taxo'
+       'body': """
+            $args = array(
+               'taxonomy' => 'category', //empty string(''), false, 0 don't work, and return empty array
+                'orderby' => 'name',
+                'order' => 'ASC',
+                'hide_empty' => true, //can be 1, '1' too
+                'include' => 'all', //empty string(''), false, 0 don't work, and return empty array
+                'exclude' => 'all', //empty string(''), false, 0 don't work, and return empty array
+                'exclude_tree' => 'all', //empty string(''), false, 0 don't work, and return empty array
+                'number' => false, //can be 0, '0', '' too
+                'offset' => '',
+                'fields' => 'all',
+                'name' => '',
+                'slug' => '',
+                'hierarchical' => true, //can be 1, '1' too
+                'search' => '',
+                'name__like' => '',
+                'description__like' => '',
+                'pad_counts' => false, //can be 0, '0', '' too
+                'get' => '',
+                'child_of' => false, //can be 0, '0', '' too
+                'childless' => false,
+                'cache_domain' => 'core',
+                'update_term_meta_cache' => true, //can be 1, '1' too
+                'meta_query' => '',
+                'meta_key' => array(),
+                'meta_value'=> '',
+                );
+            $terms = get_terms($args);
+            //print_r($terms);
+            if (! empty($terms) && ! is_wp_error($terms)) {
+                $count = count($terms);
+                $i = 0;
+                $term_list = '<p class="my_term-archive">';
+                foreach ($terms as $term) {
+                    $i++;
+                    $term_list .= '<a href="' . esc_url(get_term_link($term)) . '" alt="' . esc_attr(sprintf(__('View all post filed under %s', 'my_localization_domain'), $term->name)) . '"> '. $term->name .' </a><span> ('.$term->count.') </span>';
+                    if ($count != $i) {
+                        $term_list .= ' &middot; ';
+                    } else {
+                        $term_list .= '</p>';
+                    }
+                }
+                echo $term_list;
+            }
+         """
+       'description': 'Widget to display taxonomy'
+       'descriptionMoreURL': 'https://developer.wordpress.org/reference/functions/get_terms/'
+  	'WP Widget Archive ':
+       'prefix': 'wp__widg_archive'
+       'body': """
+            $args = array(
+                'type'            => 'monthly',
+                'limit'           => '',
+                'format'          => 'html',
+                'before'          => '',
+                'after'           => '',
+                'show_post_count' => false,
+                'echo'            => 1,
+                'order'           => 'DESC'
+            );
+            wp_get_archives( $args );
+         """
+       'description': 'Widget to display archive'
+       'descriptionMoreURL': 'https://developer.wordpress.org/reference/functions/wp_get_archives/'
+  	'WP Widget Recent Post ':
+       'prefix': 'wp__widg_rec_post'
+       'body': """
+            <ul>
+            <?php
+            $defaults = array(
+                'numberposts' => 10, 'offset' => 0,
+                'category' => 0, 'orderby' => 'post_date',
+                'order' => 'DESC', 'include' => '',
+                'exclude' => '', 'meta_key' => '',
+                'meta_value' =>'', 'post_type' => 'post', 'post_status' => 'draft, publish, future, pending, private',
+                'suppress_filters' => true
+            );
+                $recent_posts = wp_get_recent_posts( $defaults );
+                foreach( $recent_posts as $recent ){
+                    printf( '<li><a href="%1$s">%2$s</a></li>',
+                         esc_url( get_permalink( $recent['ID'] ) ),
+                         apply_filters( 'the_title', $recent['post_title'], $recent['ID'] )
+                     );
+                } wp_reset_query();
+            ?>
+            </ul>
+         """
+       'description': 'Widget to display recent post'
+       'descriptionMoreURL': 'https://developer.wordpress.org/reference/functions/wp_get_recent_posts/'
+  	'WP Pods Query ':
+       'prefix': 'wp_pods_query_1'
+       'body': """
+            <?php
+             $arg= array(
+                  'nova_menu.term_id != 264',
+                  'nova_menu.term_id != 210',
+                  'nova_menu.term_id != 208',
+                  'nova_menu_item_label.term_id = 211',
+                  't.post_status = "publish"'
+              );
+              $params = array(
+                  'limit' => 30,
+                  'where' => $arg,
+                  //'and' =>  't.post_status = "publish"',
+                  'orderby' => 'post_date DESC',
+              );
+              $mypod = pods( 'nova_menu_item' )->find( $params );
+              $frag = "<ul>";
+              // Loop through the records returned
+              while ( $mypod->fetch() ) {
+                  $frag .= '<li><a href="'.esc_url($mypod->display('guid')).'">'.$mypod->display( 'post_title' ).'</a></li>';
+              }
+              $frag .="</ul>";
+              echo $frag;
+            ?>
+         """
+       'description': 'WP Plugin: Pods Sample Query with Argument'
+       'descriptionMoreURL': 'https://pods.io/docs/code/pods/find/'
+  	'Emmet Syntax':
+       'prefix': 'emmet__syntax'
+       'body': """
+          	#myid.wrap.myclass[title="titlename"]>ul>(li#myid$$>span.style>a[href="#"]{mytext$$})*3
+            <!--ctrl+e-->
+         """
+       'description': 'Emmet Syntax Example'
+       'descriptionMoreURL': 'https://designshack.net/articles/css/7-awesome-emmet-html-time-saving-tips/'

@@ -28,6 +28,7 @@
     telemetryConsent: "limited"
     uriHandlerRegistration: "always"
   editor:
+    fontSize: 15
     showIndentGuide: true
     showInvisibles: true
   "exception-reporting":
