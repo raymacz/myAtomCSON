@@ -2,20 +2,19 @@
   "atom-beautify":
     executables:
       php:
-        path: "F:\\Raymacz\\xampp\\php\\php.exe"
+        path: "J:\\xampp\\php\\php.exe"
       "php-cs-fixer":
-        path: "F:\\Raymacz\\xampp\\php\\php-cs-fixer.phar"
+        path: "J:\\xampp\\php\\php-cs-fixer.phar"
     general:
       _analyticsUserId: "55e6ea4d-019e-41a2-8e95-f7769ed9e215"
       beautifyEntireFileOnSave: false
     html: {}
   "autocomplete-php":
-    executablePath: "F:\\Raymacz\\xampp\\php\\php.exe"
+    executablePath: "J:\\xampp\\php\\php.exe"
   "color-picker":
     preferredFormat: "HSL"
   core:
     disabledPackages: [
-      "atom-bootstrap3"
       "language-ruby-on-rails"
       "language-csharp"
       "language-mustache"
@@ -36,11 +35,12 @@
   "file-icons": {}
   "git-plus":
     general:
-      gitPath: "F:\\MyTutorials\\MyWork\\Git\\bin\\git.exe"
+      gitPath: "C:\\Program Files\\MyWork\\Git\\bin\\git.exe"
   "linter-php":
     errorReporting: false
-    executablePath: "F:\\Raymacz\\xampp\\php\\php.exe"
-  "linter-ui-default": {}
+    executablePath: "J:\\xampp\\php\\php.exe"
+  "linter-ui-default":
+    showPanel: true
   minimap:
     plugins:
       "find-and-replace": true

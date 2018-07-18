@@ -1,0 +1,158 @@
+<?php
+
+error_reporting(E_ALL); //during developement, add this to help in making WP plugins
+/**
+* Plugin Name: <%= Title %> RBTM CPT Metabox
+* Description: Offers a method for Custom Post types and store it using metabox.  It is then displayed to a post using Shortcode.
+* Version: 0.1.0
+* Author: Raymacz
+* Author URI: http:webmacz.ml
+* Text Domain: rbtm
+* License: GPL2+
+*
+*/
+
+class RBTM_Movies_Post_Type {
+
+	public function __construct()
+	{	//602 - Registering a New Post Type
+		$this->register_post_type();
+		$this->taxonomies();
+		$this->metaboxes();
+	}
+
+	public function register_post_type()
+	{
+		$args = array(
+			'labels' => array( // labels to display
+				'name' => 'Movies',
+				'singular_name' => 'Movie',
+				'add_new' => 'Add New Movie',
+				'add_new_item' => 'Add New Movie Item',
+				'edit_item' => 'Edit Item',
+				'new_item' => 'Add New Item',
+				'view_item' => 'View Movie',
+				'search_items' => 'Search Movies',
+				'not_found' => 'No Movies Found',
+				'not_found_in_trash' => 'No Movies Found in Trash',
+			),
+//			'query_var' => 'movies',
+			'query_var' => false,
+			'rewrite' => array(
+				'slug' => 'movies',
+				//'slug' => 'movies/',
+			),
+			'public' => true,
+			//'menu_position' => 25, // (int) where menu is located in the admin
+			//603 - Menu Positioning and Custom Icons
+			'menu_icon' => admin_url().'images/media-button-video.gif',  ///  F:\Raymacz\xampp\htdocs\wp\site1\wp-admin\images
+			'supports' => array(
+				'title',
+				'thumbnail', //set featured image
+				'excerpt',
+			//	'custom-fields', //  user can insert their own custom fields
+				//'editor',
+			)
+		);
+	/*	echo "<pre>";	print_r($args);	echo "</pre>"; */
+		register_post_type('rbtm_movie', $args);
+	}
+
+	public function taxonomies()
+	{
+		$taxonomies = array(); // we created an array for genere, actors, etc.
+			// genre examples: Science Fiction, Comedy, Drama, Horror, Romance
+		$taxonomies['genre'] = array( // genre taxonomies, we can also add actors
+			'hierarchical' => true,  // if it can have parent items
+//			'query_var' => 'movie_genre',
+			'query_var' => true,
+			'rewrite' => array(
+//				'slug' => 'movies/genre',
+				'slug' => 'genre',
+			),
+			'labels' => array( // labels to display
+                                'name' => 'Genres',
+                                'singular_name' => 'Genre',
+				'edit_item' => 'Edit Genre',
+				'update_item' => 'Update Genre',
+				'add_new_item' => 'Add New Genre Item',
+				'new_item_name' => 'New Genre Item Name',
+				'all_items' => 'All Genres',
+				'search_items' => 'Search Genres',
+				'popular_items' => 'Popular Genres',
+				'separate_items_with_commas' => 'Separate Genres with commas',
+				'add_or_remove_items' => 'add or remove genres',
+				'choose_from_most_used' => 'Choose from most used genres',
+			),
+                        'show_ui'           => true,
+                        'show_admin_column' => true,
+		); // studio examples: Warner Brothers, Imagine, Marvel Studios, Disney Studios
+		$taxonomies['studio'] = array( // genre studio, we can also add actors
+			'hierarchical' => true,  // if it can have parent items
+//			'query_var' => 'movie_studio',
+			'query_var' => true,
+			'rewrite' => array(
+//				'slug' => 'movies/studios',
+				'slug' => 'studios',
+			),
+			'labels' => array( // labels to display
+                            'name' => 'Studios',
+				'singular_name' => 'Studio',
+				'edit_item' => 'Edit Studio',
+				'update_item' => 'Update Studio',
+				'add_new_item' => 'Add New Studio Item',
+				'new_item_name' => 'New Studio Item Name',
+				'all_items' => 'All Studios',
+				'search_items' => 'Search Studios',
+				'popular_items' => 'Popular Studios',
+				'separate_items_with_commas' => 'Separate Studios with commas',
+				'add_or_remove_items' => 'add or remove Studios',
+				'choose_from_most_used' => 'Choose from most used Studios',
+			),
+                        'show_ui'           => true,
+                        'show_admin_column' => true,
+		);
+
+		$this->register_all_taxonomies($taxonomies);
+	}
+
+	public function register_all_taxonomies($taxonomies) // pair taxonomies w/ main post
+	{
+		///register_taxonomy('movie_genre', array('rbtm_movie'),$args); //1st- what movie, 2nd- movie type (object)
+		foreach ($taxonomies as $name => $arr) {
+			register_taxonomy($name, array('rbtm_movie'), $arr); //1st- what movie, 2nd- movie type (object), $arr - arguemnts ($args)
+		}
+	}
+
+	public function metaboxes()
+	{
+		add_action('add_meta_boxes', function() {
+			// css id, title, cb, assoc. post type/page, priority lvl, cb arg.
+			add_meta_box('rbtm_movie_length', 'Movie Length', 'movie_length', 'rbtm_movie'); // add new metabox to the post type // $screen could be any post type
+		});
+
+		function movie_length($post) {
+								//  ID property, css id/key, (single or array) (true or false)
+			$length = get_post_meta($post->ID, 'rbtm_movie_length', true);
+			?>
+			<p>
+				<label for="rbtm_movie_length"> Length: </label>
+				<input type="text" class= "widefat" name="rbtm_movie_length" id="rbtm_movie_length" value="<?php echo esc_attr($length);?>" />
+			</p>
+			<?php
+		}
+
+		add_action('save_post', function($id) {
+			if (isset($_POST['rbtm_movie_length'])) {
+				update_post_meta( $id, 'rbtm_movie_length', strip_tags($_POST['rbtm_movie_length']) );
+			}
+		});
+	}
+}
+
+add_action('init', function() {
+	new RBTM_Movies_Post_Type();
+	include dirname(__FILE__).'/RBTM_cpt_mbox_scode.php';
+});
+
+?>

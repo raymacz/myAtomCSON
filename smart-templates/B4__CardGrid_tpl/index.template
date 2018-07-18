@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <title>Hello, world!</title>
+  <style type="text/css">
+    .rowz {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0 4px;
+    }
+
+    /* Create four equal columns that sits next to each other */
+
+    .columnz {
+      flex: 25%;
+      max-width: 25%;
+      padding: 0 4px;
+    }
+
+    .columnz img {
+      margin-top: 8px;
+      vertical-align: middle;
+    }
+
+    .mb4 {
+      margin-bottom: 0.5em;
+    }
+
+
+    /* Responsive layout - makes a two column-layout instead of four columns */
+
+    @media screen and (max-width: 800px) {
+      .columnz {
+        flex: 50%;
+        max-width: 50%;
+      }
+    }
+
+    /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+
+    @media screen and (max-width: 600px) {
+      .columnz {
+        flex: 100%;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1><%= Title %></h1>
+  <div class="container">
+    <div class="card mb-4 box-shadow" style="width:400px">
+      <img class="card-img-top" src="img/team/1.jpg" alt="Card image cap">
+      <div class="card-body">
+        <h4 class="card-title">Card title</h4>
+        <p class="card-text">Some example text. Some example text.</p>
+        <div class="btn-group">
+          <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+          <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+        </div>
+        <a href="#" class="card-link">Another link</a>
+      </div>
+    </div>
+    <!--- team start  linear grid-->
+    <div class="row">
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card mb-4 box-shadow">
+          <img class="card-img-top" src="img/team/1.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card mb-4 box-shadow">
+          <img class="card-img-top" src="img/team/2.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card mb-4 box-shadow">
+          <img class="card-img-top" src="img/team/1.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card mb-4 box-shadow">
+          <img class="card-img-top" src="img/team/3.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--- team end -->
+    <!--- w31 uneven grid -->
+    <div class="rowz">
+      <div class="columnz">
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/wedding.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/rocks.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/falls2.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/paris.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/nature.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/mist.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/paris.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+      </div>
+      <!-- columnz -->
+      <div class="columnz">
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/underwater.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/ocean.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/wedding.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/mountainskies.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/rocks.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/underwater.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+      </div>
+      <!-- columnz -->
+      <div class="columnz">
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/wedding.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/rocks.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/falls2.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/paris.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/nature.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/mist.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/paris.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+      </div>
+      <!-- columnz -->
+      <div class="columnz">
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/underwater.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/ocean.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/wedding.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/mountainskies.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/rocks.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+        <div class="card mb4 box-shadow">
+          <img class="card-img-top" src="img/w3/underwater.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+      </div>
+      <!-- columnz -->
+    </div>
+    <!-- rowz -->
+
+    <!--- w31 with row linear grid -->
+    <div class="row">
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card mb-4 box-shadow">
+          <img class="card-img-top" src="img/w3/ocean.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card mb-4 box-shadow">
+          <img class="card-img-top" src="img/w3/paris.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card mb-4 box-shadow">
+          <img class="card-img-top" src="img/w3/rocks.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card mb-4 box-shadow">
+          <img class="card-img-top" src="img/w3/underwater.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">Some example text. Some example text.</p>
+            <div class="btn-group">
+              <button href="#" class="btn btn-sm btn-outline-secondary">View</button>
+              <button href="#" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>

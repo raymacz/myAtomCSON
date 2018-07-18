@@ -1,0 +1,161 @@
+
+<?php
+// Template for Taxonomy
+
+https://shibashake.com/wordpress-theme/add-custom-taxonomy-tags-to-your-wordpress-permalinks
+
+/* //add to functions.php to call this template parts
+add_action('shutdown', function(){
+  if ( is_front_page() && is_page() ) :
+    get_template_part( 'template-parts/content', 'query_sbox' );
+  endif;
+}, 10, 1);
+*/
+/*
+usually slug or url of taxonomy:
+  taxonomy: menu_course slug: menu-course/name/ or menu-courses/name/
+    eg: http://site1.net/menu-course/drinks/  or http://site1.net/menu-courses/drinks/
+
+*/
+
+ ?>
+ <div class="container-fluid mail-career ">
+   <div class="container">
+     <div class="row justify-content-center">
+       <div class="col-lg-7 ">
+         <section class="sbox-section">
+           <div class="b-title">
+             <h3 class="p-title" style="text-align: center;">Custom Queries</h3>
+           </div>
+           <div class="wpb-wrapper">
+<?php
+ /// ========================== PLAN B - Course Package
+//    if (is_front_page() && is_main_query() && is_archive() && is_tax('menu_course') && is_post_type_archive('course_package') {
+   if (is_front_page() && is_main_query()) {
+//        $mytax= get_queried_object();
+       $mytax = 'course_package';
+//        $myterm_taxonomy_id= 244;
+//        $mytax_obj =  get_term_by('id', 244, $mytax);
+//        $myterms = get_the_terms(1872, 'nova_menu');
+
+       echo" //======== get_term: ";
+//        var_dump(get_term(244, $mytax));
+       echo" //======== get_terms: ";
+//        var_dump(get_terms($mytax));
+//https://codex.wordpress.org/Class_Reference/WP_Query#Taxonomy_Parameters
+
+$args = array(
+   'post_type' => 'course_package',
+   'posts_per_page' => -1,
+ );
+
+ // the query
+ $myquery = new WP_Query( $args );
+
+ // The Loop
+ if ( $myquery->have_posts() ) :
+     echo "<pre> <p style='color: blue;'>Query Result:    </p> ";
+   while ( $myquery->have_posts() ) : $myquery->the_post();
+                 // start template; =============================
+               // echo" //the_post_thumbnail: "; // the_post_thumbnail();
+               the_title_attribute();
+               echo" //the_title: "; the_title($before = '<p>', $after = '</p>');
+               echo" //the_excerpt: ";                the_excerpt();
+               echo" //the_content: ".get_the_content( $more_link_text = null, $strip_teaser = false );
+//                echo" //get_post_custom_keys: ".get_post_custom_keys()[6];
+//                var_dump(get_post_custom_keys());
+               $term_taxonomy_id = get_post_meta(get_the_ID(), 'course_pack', true)['term_taxonomy_id'];
+               echo" //get_post_meta: ".$term_taxonomy_id;
+               echo" <br /><br /><br /> ----- 1st template";
+               // end template =============================
+   endwhile;
+   echo "</pre>";
+ endif;
+ wp_reset_postdata(); /* Restore original Post Data */
+
+$args = array(
+   'post_type' => 'course_pack',
+   'posts_per_page' => -1,
+   'tax_query' => array(
+//        'relation' => 'OR', //default &&
+       array(
+         'taxonomy'=>'pack_tax',
+         'field'=> 'term_id',
+         'terms'=>array($term_taxonomy_id),
+         'include_children'=>true,
+         'operator'=>'AND',
+       ),
+    ),
+ );
+
+       $my_query = new WP_Query($args);
+       // The Loop
+       if ($my_query->have_posts()) {
+           echo "<pre> <p style='color: blue;'>Query Result:    </p> ";
+           while ($my_query->have_posts()) {
+               $my_query->the_post();
+               // start template; =============================
+                 echo" //get_post_custom_keys: ";//.get_post_custom_keys()[4];
+                 var_dump(get_post_custom_keys());
+                 echo" //get_post_meta_qty: ". get_post_meta(get_the_ID(), 'course_qty', true);
+                 $term_id=get_post_meta(get_the_ID(), 'course_name', true)['term_taxonomy_id'];
+                 echo" //get_post_meta_tax_id: ".$term_id;
+                 echo" //get_post_meta_slug: ". get_post_meta(get_the_ID(), 'course_name', true)['slug'];
+//                  var_dump(get_post_meta(get_the_ID(), 'course_name', true));
+                echo" //get_term_link: ". get_term_link((int)$term_id)." term_id: ". $term_id;
+               // end template =============================
+//                echo" //mytax_name ".$mytax_obj->name;
+//                echo" //mytax_descripton: ".$mytax_obj->description;
+               echo" //get_query_var: ". get_query_var('taxonomy'); // this will only work if is_archive() is true;
+               echo" //get_term_link: ". get_term_link(242);
+               echo" //post_class: ";
+               post_class(array('left','post'));
+               echo" //the_meta: ";
+               the_meta();
+               echo" //get_post_custom_keys: ".get_post_custom_keys()[4];
+//                echo" //get_post_custom_values: ".get_post_custom_values(get_post_custom_keys()[3])[0];
+               // echo" //get_post_meta: ".get_post_meta(get_the_ID(), get_post_custom_keys()[3], false)[3]['name'];
+//                echo" //get_post_meta: ".get_post_meta(get_the_ID(), get_post_custom_keys()[3], false)[0]['name'];
+                echo" //get_post_meta: ";  print_r(get_post_meta(get_the_ID(), get_post_custom_keys()[3], false));
+               // echo" //the_post_thumbnail: ";
+               // the_post_thumbnail();
+//                echo" //get_post_custom: ".get_post_custom(get_the_ID())['menu_course'][0];
+               // var_dump(get_post_custom(get_the_ID()));
+               echo" //the_ID: ";
+               the_ID();
+               echo" //the_permalink: ";
+               the_permalink();
+               echo" //the_title_attribute: ";
+               the_title_attribute();
+               echo" //the_archive_title: ";
+               the_archive_title();
+               echo" //the_archive_description: ";
+               the_archive_description();
+               echo" //the_title: ";
+               the_title($before = '<p>', $after = '</p>');
+               echo" //the_time: ";
+               the_time('F jS, Y');
+               echo" //the_author: ";
+               the_author();
+               echo" //the_content: ";
+               the_content($more_link_text = null, $strip_teaser = false);
+               echo" //the_tags: ";
+               the_tags();
+               echo" //the_category: ";
+               the_category();
+               echo" //comments_popup_link: ";
+               comments_popup_link();
+               echo "<br />";echo" //======= END OF ITEM =======";
+           } // end while
+           echo "</pre>";
+       } // endif
+       wp_reset_postdata();
+   } // is_main_query
+ ?>
+           </div>            <!-- wpb-wrapper -->
+         </section>          <!-- mail-subscription -->
+       </div>        <!-- col-md-7 -->
+     </div>      <!-- row -->
+     </section>      <!-- careers -->
+   </div>    <!-- container -->
+ </div>  <!-- container-fluid -->
