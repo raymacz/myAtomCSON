@@ -63,4 +63,41 @@
     ]
     devMode: true
   }
+  {
+    title: "Flash"
+    paths: [
+      "J:\\xampp\\htdocs\\wp\\site4\\wp-content\\themes\\flash"
+      "J:\\xampp\\htdocs\\wp\\site4\\wp-content\\plugins\\woocommerce\\templates"
+    ]
+    devMode: true
+  }
+  {
+    title: "WP API - related Post"
+    paths: [
+      "J:\\xampp\\htdocs\\wp\\site4\\wp-content\\plugins\\gofurtherz"
+    ]
+  }
+  {
+    title: "Relpost Rbtm"
+    paths: [
+      "J:\\xampp\\htdocs\\wp\\site4\\wp-content\\plugins\\relpost-rbtm"
+      "G:\\MyTutorials\\MyExercise\\Raymacz.MyCode\\Raymacz.Custom.WP.Plugins\\Movies Post Type"
+      "G:\\MyTutorials\\MyExercise\\Raymacz.MyCode\\Tutorials.MyCode\\Lynda. jQuery for Web Designers & 30 Days to Learn jQuery\\30 Days to Learn jQuery\\MyCode\\lesson-22"
+      "G:\\MyTutorials\\MyExercise\\Raymacz.MyCode\\Tutorials.MyCode\\Lynda. jQuery for Web Designers & 30 Days to Learn jQuery\\30 Days to Learn jQuery\\MyCode\\lesson-26"
+    ]
+    devMode: true
+  }
+  {
+    title: "Generatepress"
+    paths: [
+      "J:\\xampp\\htdocs\\wp\\site2\\wp-content\\themes\\generatepress"
+      "J:\\xampp\\htdocs\\wp\\site2\\wp-content\\themes\\generatepress-child"
+    ]
+  }
+  {
+    title: "Vegas Slider"
+    paths: [
+      "G:\\MyTutorials\\MyExercise\\Raymacz.MyCode\\WP Scripts Collection\\Vegas_raymacz"
+    ]
+  }
 ]

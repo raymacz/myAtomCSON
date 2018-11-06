@@ -14,7 +14,6 @@
 *
 */
 
-// https://developer.wordpress.org/reference/hooks/pre_get_posts/
 
 // https://wordpress.stackexchange.com/questions/17394/how-to-know-what-functions-are-hooked-to-an-action-filter
 add_action( 'wp_footer', function() {
@@ -83,6 +82,7 @@ update_post_meta( $post_id, $meta_key, $meta_value, $prev_value = '' );
 get_permalink( $id = 0, $leavename = false );
 plugin_dir_url( $file );
 admin_url( $path = '', $scheme = 'admin' );
+get_site_url();
 
 esc_attr( $text );
 
@@ -97,6 +97,28 @@ add_shortcode( $tag, $func );
 shortcode_atts( $pairs, $atts, $shortcode = '' );
 do_shortcode( $content );
 
+//DATABASE ------------------------------------
+// When to use WP_query(), query_posts() and pre_get_posts
+// https://wordpress.stackexchange.com/questions/50761/when-to-use-wp-query-query-posts-and-pre-get-posts
+// https://wordpress.stackexchange.com/questions/53819/how-does-wpdb-differ-to-wp-query
+// https://www.sitepoint.com/working-with-databases-in-wordpress/
+// https://foundation.zurb.com/forum/posts/22348-seeking-a-better-custom-query-for-my-static-front-page
+
+$wpdb;
+//https://codex.wordpress.org/Class_Reference/wpdb
+// $wpdb delete CPT with related associated meta data  wphttps://gist.github.com/jazibsawar/a8c94a7361b47f507a23c2620e69b3c3
+
+dbDelta($frag_php, $execute); //custom table
+
+query_posts(); // NEVER DON'T use this query as discussed by Nacin
+
+//HELPER Functions
+// https://codex.wordpress.org/Function_Reference/
+wp_get_recent_posts($args, $frag_php);
+mysql_query($query, $link_identifier);
+//DATABASE END------------------------------------
+
+// https://codex.wordpress.org/Class_Reference/WP_Query
 $loop = new WP_Query(	array('post_type' => 'rbtm_movie','order_by' => 'title')	);
 if($loop->have_posts()) {
 	$output = '<ul class="">';
@@ -113,7 +135,7 @@ if($loop->have_posts()) {
 
 
 <?php
-// TEMPLATE INCLUDE TAGS
+// TEMPLATE TAGS INCLUDE
 get_header(); // otherwise include wp-content/themes/default/header.php
 get_sidebar(); // otherwise include wp-content/themes/default/sidebar.php
 get_footer(); // otherwise include wp-content/themes/default/footer.php
@@ -130,7 +152,9 @@ wp_list_pages(); // Displays all a list of WordPress Pages as links
 wp_register(); // Displays either the "Register" link to users that are not logged in or the "Site Admin" link if a user is logged in
 wp_loginout(); // Displays the log in/out link  (login link, or if a user is logged in, a logout link)
 wp_tag_cloud(); // Displays a list of tags called 'tag cloud'
+get_the_author();
 bloginfo('param'); // 'name' Displays information about blog (see table below)
+bloginfo('template_directory');
 
 
 // API HOOKS
@@ -288,6 +312,7 @@ is_time(); // When an hourly, "minutely", or "secondly" archive is being display
 is_archive(); // When any type of Archive page is being displayed. Category, Tag, Author and Date based pages are all types of Archives.
 is_main_query();
 is_feed( $feeds = '' );
+is_admin();
 
 
 FUNCTION bloginfo($param) {}; ?>

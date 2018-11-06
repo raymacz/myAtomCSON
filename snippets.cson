@@ -59,6 +59,24 @@
         }
        """
      'description': 'CSS horizontally aligns an image inside div using flex'
+   'H-Align Element':
+     'prefix': 'css__align-elem'
+     'body': """
+          /* element insider wrapper */
+          .elementor-navigation ul {
+              list-style: none;
+              margin: 0;
+              display: inline-block;
+              width: 1140px;
+              text-align: left;
+          }
+          /* div or nav wrapper */
+          nav#elementor-navigation {
+            margin: 0 auto;
+            text-align: center;
+          }
+       """
+     'description': 'CSS horizontally aligns any element. This is a Navigation Menu example'
    'V-Align Any Elem':
      'prefix': 'css__align-vae'
      'body': """
@@ -149,16 +167,66 @@
         }
        """
      'description': 'My Box Shadow Setting for Images'
+ 	 'CSS Blockquote':
+     'prefix': 'css__blockquote'
+     'body': """
+        div blockquote {
+            font-size: 0.9em;
+            background: hsla(210, 11%, 15%, 0.45);
+            padding: 1em 1em 1em 3em;
+            font-family: $font-fam2;
+            margin: 0;
+            text-align: left;
+            &:before {
+              display: block;
+                  width: 38%;
+                  height: 100%;
+                  position: absolute;
+                  top: -0.15em;
+                  left: -0.30em;
+                  content: "“";
+                  font-weight: bolder;
+                  font-size: 12em;
+                  color: $color-blk;
+                  font-weight: 400;
+                  line-height: 100%;
+                  border-bottom: none;
+                  border-top: none;
+            }
+          }
+       """
+     'description': 'Blockquote CSS Styling'
  	 'CSS Padding color':
-     'prefix': 'css__pad_color'
+     'prefix': 'css__pad_gradient'
      'body': """
           div {
               padding:35px;
-              background-image:linear-gradient(to bottom, purple 0%, purple 100%), linear-gradient(to bottom, blue 0%, blue 100%);
+              background-image:linear-gradient(to bottom, rgb(71, 71, 71) 50%, rgb(158, 17, 17) 100%), linear-gradient(to bottom, rgb(167, 21, 21) 50%, rgb(0, 0, 0) 100%)
               background-clip: content-box, padding-box;
           }
+          /* OR plain no gradient https://stackoverflow.com/questions/14628601/can-i-add-background-color-only-for-padding */
+          header.entry-header {
+              word-wrap: break-word;
+              padding: 10px 0 10px 25px;
+              background-color: #212529;
+              position: relative;
+              border: 2px solid green;
+              z-index: 10;
+          }
+
+          header.entry-header:after {
+              background-color: #ffc107;
+              position: absolute;
+              top: 0px;
+              left: 0px;
+              right: 30px;
+              bottom: 0px;
+              content: '';
+              display: block;
+              z-index: -1;
+          }
        """
-     'description': 'Color for content and padding'
+     'description': 'Color for content and padding gradient or plain color'
      'descriptionMoreURL': 'http://jsfiddle.net/TyXRY/639/'
  	 'CSS Align Image':
      'prefix': 'css__align_img'
@@ -174,9 +242,70 @@
             }
           }
         }
+        /* note: use inline-block on a div container of <figure> and <img> to match height size */
        """
      'description': 'Aligns image to center & behaves like float: left with margin auto.'
      'descriptionMoreURL': 'http://jsfiddle.net/4xxvb/3/'
+ 	 'CSS sticky post':
+     'prefix': 'css__sticky_p'
+     'body': """
+          #main>article {
+              position: relative;
+          }
+          .sticky::before {
+              position: absolute;
+              content: "";
+              display: block;
+              width: 2em;
+              height: 2em;
+              background-color: lightgray;
+              right: 0;
+              top: 0;
+              border-width: 0 2em 2em 0;
+              border-color: #f8f9fa rgba(228, 226, 226, 0.5) #f8f9fa;
+              border-style: solid;
+              -webkit-box-shadow: -1px 2px 2px rgba(26, 26, 26, 0.1);
+              box-shadow: -1px 2px 2px rgba(26, 26, 26, 0.1);
+          }
+       """
+     'description': 'Sticky Post or blog'
+ 	 'CSS Embed Video Responsive':
+     'prefix': 'css__video_resp'
+     'body': """
+          /* responsive embedded video */
+          div.video-wrap {
+            position: relative;
+            padding-bottom: 10%;
+            padding-top 10px;
+            height: 0;
+            overflow: hidden;
+          }
+          div.video-wrap iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100;
+          }
+       """
+     'description': 'responsive embedded video inside an iframe.'
+ 	 'CSS Slider Gradient':
+     'prefix': 'css__slider_gradient'
+     'body': """
+          /* this must be placed just before the <figure> of each slider <image> */
+          .slick-slide:before {
+              content: '';
+              position: absolute;
+              display: block;
+              width: 100%;
+              height: 24%;
+              left: 0;
+              bottom: -1px;
+              z-index: 1;
+              background: linear-gradient( transparent 40%, #1d2120 200% );
+          }
+       """
+     'description': 'Slider Gradient for Adding Text in a footer using pseudo'
  	 'SASS Bootstrap4 Grid':
      'prefix': 'sass__b4_grid_media'
      'body': """
@@ -1675,3 +1804,44 @@
          """
        'description': 'Emmet Syntax Example'
        'descriptionMoreURL': 'https://designshack.net/articles/css/7-awesome-emmet-html-time-saving-tips/'
+  	'CF7 Attributes':
+       'prefix': 'wp__cf7_attrib'
+       'body': """
+            add_filter( 'wpcf7_form_elements', 'imp_wpcf7_form_elements' );
+            function imp_wpcf7_form_elements( $content ) {
+                $str_pos = strpos( $content, 'name="inique-name"' );
+                $content = substr_replace( $content, ' data-attr="custom" data-msg="Текст 1" ', $str_pos, 0 );
+                return $content;
+            }
+         """
+       'description': 'Contact Form 7 Custom Attributes'
+       'descriptionMoreURL': 'https://stackoverflow.com/questions/46274317/how-to-add-a-custom-attribute'
+   'WP Get Template Part Shortcode':
+   		 'prefix': 'wp__gettpl_shortc'
+   		 'body': """
+            // [rbtm_brizy foo="myfoo-value"]
+            function rbtmbrizy_func( $atts ) {
+            	$a = shortcode_atts( array(
+            		'foo' => 'default foo',
+            		'bar' => 'default bar',
+            	), $atts );
+            //	return "foo = {$a['foo']}";
+                    ob_start();
+                    get_template_part( 'template-parts/content', 'chef' );
+                    $output = ob_get_clean();
+                    return $output;
+            }
+            add_shortcode( 'rbtm_brizy', 'rbtmbrizy_func' );
+   		   """
+   		 'description': 'Display a template part using short code. It works well with Brizy & Elementor – Page Builder'
+   		 'descriptionMoreURL': 'https://wordpress.stackexchange.com/questions/213705/combining-shortcode-and-get-template-part'
+   'Script Window X/Y Coord':
+   		 'prefix': 'scr__get_xy'
+   		 'body': """
+            window.addEventListener("scroll", function(event) {
+                var top = this.scrollY,
+                    left =this.scrollX;
+            }, false);
+   		   """
+   		 'description': 'JavaScript get window X/Y position for scroll'
+   		 'descriptionMoreURL': 'https://stackoverflow.com/questions/3464876/javascript-get-window-x-y-position-for-scroll'

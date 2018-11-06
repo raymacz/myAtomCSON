@@ -84,13 +84,13 @@ class MyHeight {
 		do_action('in_the_middle_next_action');
 	}
 
-        public static function funcstatic($param) {
-            return $param.' method!!!';
-        }
+	public static function funcstatic($param) {
+	    return $param.' method!!!';
+	}
 
-        public function getstatic() {
-            echo "from an INSTANCE method to a".self::funcstatic('STATIC');
-        }
+	public function getstatic() {
+	    echo "from an INSTANCE method to a".self::funcstatic('STATIC');
+	}
 }
 
 

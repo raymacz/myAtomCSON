@@ -27,7 +27,6 @@
     telemetryConsent: "limited"
     uriHandlerRegistration: "always"
   editor:
-    fontSize: 15
     showIndentGuide: true
     showInvisibles: true
   "exception-reporting":
@@ -39,8 +38,7 @@
   "linter-php":
     errorReporting: false
     executablePath: "J:\\xampp\\php\\php.exe"
-  "linter-ui-default":
-    showPanel: true
+  "linter-ui-default": {}
   minimap:
     plugins:
       "find-and-replace": true

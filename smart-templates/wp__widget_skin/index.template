@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ALL); //during developement, add this to help in making WP plugins
+error_reporting(E_ALL); //during development, add this to help in making WP plugins
 /**
 * Plugin Name: <%= Title %> Messager Widget
 * Description: Displays a simple WP Widget.

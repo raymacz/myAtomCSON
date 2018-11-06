@@ -152,7 +152,7 @@ class RBTM_Movies_Post_Type {
 
 add_action('init', function() {
 	new RBTM_Movies_Post_Type();
-	include dirname(__FILE__).'/RBTM_cpt_mbox_scode.php';
+	include dirname(__FILE__).'/RBTM_cpt_mbox_scode.php';	//refers to inc_file1.template
 });
 
 ?>
