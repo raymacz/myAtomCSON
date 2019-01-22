@@ -100,4 +100,17 @@
       "G:\\MyTutorials\\MyExercise\\Raymacz.MyCode\\WP Scripts Collection\\Vegas_raymacz"
     ]
   }
+  {
+    title: "Estore Site2"
+    paths: [
+      "J:\\xampp\\htdocs\\wp\\site2\\wp-content\\themes\\estore"
+    ]
+  }
+  {
+    title: "Rbtm Loginadmin"
+    paths: [
+      "J:\\xampp\\htdocs\\wp\\site2\\wp-content\\plugins\\rbtm-loginadmin"
+    ]
+    devMode: true
+  }
 ]

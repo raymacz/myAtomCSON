@@ -1799,7 +1799,7 @@
   	'Emmet Syntax':
        'prefix': 'emmet__syntax'
        'body': """
-          	#myid.wrap.myclass[title="titlename"]>ul>(li#myid$$>span.style>a[href="#"]{mytext$$})*3
+          	#myid.wrap.myclass[title="titlename"]>ul>(li#myid$$>span.style>a[href="#"]{mytext$$})*3+br
             <!--ctrl+e-->
          """
        'description': 'Emmet Syntax Example'
@@ -1845,3 +1845,12 @@
    		   """
    		 'description': 'JavaScript get window X/Y position for scroll'
    		 'descriptionMoreURL': 'https://stackoverflow.com/questions/3464876/javascript-get-window-x-y-position-for-scroll'
+   'custom var_dump':
+   		 'prefix': 'wp__vardump'
+   		 'body': """
+              echo '<pre>rbtm dump: ';
+              var_dump($atts);
+              echo '</pre>';
+              die();
+   		   """
+   		 'description': 'Custom vardump'

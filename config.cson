@@ -23,6 +23,7 @@
       "language-objective-c"
       "language-perl"
       "language-ruby"
+      "language-java"
     ]
     telemetryConsent: "limited"
     uriHandlerRegistration: "always"

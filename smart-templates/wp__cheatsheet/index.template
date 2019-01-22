@@ -28,7 +28,7 @@ add_filter( $tag, $function_to_add, $priority = 10, $accepted_args = 1 );
 
 locate_template( $template_names, $load = false, $require_once = true );
 wp_die( $message = '', $title = '', $args = array() ); //error message
-
+wp_mail( $to, $subject, $message, $headers = '', $attachments = array() );
 wp_create_user( $username, $password, $email = '' );
 
 count_users( $strategy = 'time' );
@@ -66,13 +66,14 @@ register_nav_menu( $location, $description );
 wp_add_dashboard_widget( $widget_id, $widget_name, $callback);
 
 get_post( $post = null, $output = OBJECT, $filter = 'raw' ); //deprecated
-get_posts( $args = null );  // not recommended by Nacin - use wp_reset_query();
+get_posts( $args = null );
 get_pages( $args = array());
 
 wp_script_is( $handle, $list = 'enqueued' ); // check if script is enqueued // better use wp_head hook
 wp_style_is( $handle, $list = 'enqueued' ); // better use wp_head hook // var_dump(wp_style_is( 'nova-font'));
 wp_reset_postdata();
 wp_reset_query();
+rewind_posts();
 get_query_var( $var, $default = '' ); // https://codex.wordpress.org/WordPress_Query_Vars
 
 add_meta_box( $id, $title, $callback, $screen = null);
@@ -97,6 +98,16 @@ add_shortcode( $tag, $func );
 shortcode_atts( $pairs, $atts, $shortcode = '' );
 do_shortcode( $content );
 
+//WP Registration HOOKS
+register_activation_hook( $file, $callback );
+register_deactivation_hook( $file, $callback );
+register_uninstall_hook( $file, $callback );
+
+
+//plugins
+
+plugin_dir_path( $file );
+
 //DATABASE ------------------------------------
 // When to use WP_query(), query_posts() and pre_get_posts
 // https://wordpress.stackexchange.com/questions/50761/when-to-use-wp-query-query-posts-and-pre-get-posts
@@ -110,7 +121,7 @@ $wpdb;
 
 dbDelta($frag_php, $execute); //custom table
 
-query_posts(); // NEVER DON'T use this query as discussed by Nacin
+query_posts();
 
 //HELPER Functions
 // https://codex.wordpress.org/Function_Reference/
